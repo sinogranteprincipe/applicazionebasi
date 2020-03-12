@@ -1,12 +1,16 @@
 package Entity;
 
+public enum TipoDiVisibilita {
+    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
+}
+
 public class Attributo {
 
     private String nome;
     private TipoDiVisibilita visibilita;
-    private String valoreDefault = NULL;
-    private String stereotipo = NULL;
-    private String range = NULL;
+    private String valoreDefault = null;
+    private String stereotipo = null;
+    private String range;
     private int posizione=1;
 
     public String getNome() {

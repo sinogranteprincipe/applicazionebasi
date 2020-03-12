@@ -1,5 +1,17 @@
 package Entity;
 
+public enum TipoDiVisibilita {
+    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
+}
+
+public enum TipoDiClasse {
+    STANDARD, DATATYPE, PRIMITIVETYPE, ENUMERATION, INTERFACE;
+}
+
+public enum RuoloAssociazione {
+    SEMPLICE, EPDIRETTO, AGGREGATA, COMPOSTA;
+}
+
 public class Classe {
 
     private int id;
@@ -7,8 +19,8 @@ public class Classe {
     private TipoDiVisibilita visibilita;
     private RuoloAssociazione rappresenta;
     private TipoDiClasse tipoClasse;
-    private String stereotipo = NULL;
-    private String commento = NULL;
+    private String stereotipo = null;
+    private String commento = null;
 
     public int getId() {
         return id;

@@ -1,5 +1,9 @@
 package Entity;
 
+public enum TipoDiVisibilita {
+    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
+}
+
 public class Metodo {
 
     private int id;

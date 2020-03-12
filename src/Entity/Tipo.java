@@ -4,8 +4,8 @@ public class Tipo {
 
     private int id;
     private String nome;
-    private String range = NULL;
-    private int dimensioneArray = 0;
+    private String range = null;
+    private int dimensioneArray = -1;
     private boolean Array = false;
     private boolean Primitivo = false;
 

@@ -4,7 +4,7 @@ public class ClassDiagram {
 
     private int id;
     private String nome;
-    private String commento;
+    private String commento = null;
 
     public int getId() {
         return id;

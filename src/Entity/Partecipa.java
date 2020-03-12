@@ -3,7 +3,7 @@ package Entity;
 public class Partecipa {
 
     private String molteplicita;
-    private String ruoloClasse = NULL;
+    private String ruoloClasse = null;
 
     public String getMolteplicita() {
         return molteplicita;

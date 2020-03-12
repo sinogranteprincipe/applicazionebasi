@@ -1,5 +1,13 @@
 package Entity;
 
+public enum TipoDiVisibilita {
+    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
+}
+
+public enum TipoDiAssociazione {
+    DIRETTA, BIDIREZIONALE, COMPOSIZIONE, AGGREGAZIONE;
+}
+
 public class Associazione {
 
     private int id;
@@ -7,7 +15,7 @@ public class Associazione {
     private TipoDiAssociazione raffigura;
     private int numeroMembri;
     private TipoDiVisibilita visibilita;
-    private String commento = NULL;
+    private String commento = null;
 
     public int getId() {
         return id;

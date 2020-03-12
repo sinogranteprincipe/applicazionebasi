@@ -4,7 +4,7 @@ public class Package {
 
     private int id;
     private String nome;
-    private String commento;
+    private String commento = null;
 
     public int getId() {
         return id;
