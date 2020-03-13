@@ -1,4 +1,4 @@
-package Entity;
+package Entity.Partecipa;
 
 public class Partecipa {
 

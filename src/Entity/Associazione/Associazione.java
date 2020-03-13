@@ -1,12 +1,9 @@
-package Entity;
+package Entity.Associazione;
 
-public enum TipoDiVisibilita {
-    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
-}
-
-public enum TipoDiAssociazione {
-    DIRETTA, BIDIREZIONALE, COMPOSIZIONE, AGGREGAZIONE;
-}
+import Entity.ClassDiagram.ClassDiagram;
+import Entity.Classe.Classe;
+import Entity.TipoDiAssociazione;
+import Entity.TipoDiVisibilita;
 
 public class Associazione {
 
@@ -16,6 +13,35 @@ public class Associazione {
     private int numeroMembri;
     private TipoDiVisibilita visibilita;
     private String commento = null;
+    private int idClasseDiAssociazione;
+    private int idClassDiagram;
+
+    public Associazione(int id, String nome, TipoDiAssociazione raffigura, int numeroMembri, TipoDiVisibilita visibilita, String commento, int idClasseDiAssociazione, int idClassDiagram) {
+        this.id = id;
+        this.nome = nome;
+        this.raffigura = raffigura;
+        this.numeroMembri = numeroMembri;
+        this.visibilita = visibilita;
+        this.commento = commento;
+        this.idClasseDiAssociazione = idClasseDiAssociazione;
+        this.idClassDiagram = idClassDiagram;
+    }
+
+    public int getIdClasseDiAssociazione() {
+        return idClasseDiAssociazione;
+    }
+
+    public void setIdClasseDiAssociazione(int idClasseDiAssociazione) {
+        this.idClasseDiAssociazione = idClasseDiAssociazione;
+    }
+
+    public int getIdClassDiagram() {
+        return idClassDiagram;
+    }
+
+    public void setIdClassDiagram(int idClassDiagram) {
+        this.idClassDiagram = idClassDiagram;
+    }
 
     public int getId() {
         return id;
@@ -65,12 +91,4 @@ public class Associazione {
         this.commento = commento;
     }
 
-    public Associazione(int id, String nome, TipoDiAssociazione raffigura, int numeroMembri, TipoDiVisibilita visibilita, String commento) {
-        this.id = id;
-        this.nome = nome;
-        this.raffigura = raffigura;
-        this.numeroMembri = numeroMembri;
-        this.visibilita = visibilita;
-        this.commento = commento;
-    }
 }

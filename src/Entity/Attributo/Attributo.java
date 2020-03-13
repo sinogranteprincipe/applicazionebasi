@@ -1,17 +1,42 @@
-package Entity;
+package Entity.Attributo;
 
-public enum TipoDiVisibilita {
-    PUBLIC, PRIVATE, PROTECTED, PACKAGE;
-}
+import Entity.TipoDiVisibilita;
 
 public class Attributo {
 
+    private int id;
     private String nome;
+    private int idTipo;
     private TipoDiVisibilita visibilita;
     private String valoreDefault = null;
     private String stereotipo = null;
     private String range;
     private int posizione=1;
+    private int idClasse;
+
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdClasse() {
+        return idClasse;
+    }
+
+    public void setIdClasse(int idClasse) {
+        this.idClasse = idClasse;
+    }
 
     public String getNome() {
         return nome;
@@ -60,13 +85,15 @@ public class Attributo {
         this.posizione = posizione;
     }
 
-    public Attributo(String nome, TipoDiVisibilita visibilita, String valoreDefault, String stereotipo, String range, int posizione) {
+    public Attributo(int id, String nome,int idTipo, TipoDiVisibilita visibilita,  String range, String valoreDefault, String stereotipo, int idClasse, int posizione) {
+        this.id = id;
+        this.idTipo= idTipo;
         this.nome = nome;
         this.visibilita = visibilita;
         this.valoreDefault = valoreDefault;
         this.stereotipo = stereotipo;
         this.range = range;
         this.posizione = posizione;
+        this.idClasse = idClasse;
     }
-
 }

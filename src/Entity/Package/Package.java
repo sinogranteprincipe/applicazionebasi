@@ -1,4 +1,4 @@
-package Entity;
+package Entity.Package;
 
 public class Package {
 
@@ -36,4 +36,12 @@ public class Package {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "Package{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", commento='" + commento + '\'' +
+                '}';
+    }
 }

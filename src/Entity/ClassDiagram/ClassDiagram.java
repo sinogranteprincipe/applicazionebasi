@@ -1,4 +1,4 @@
-package Entity;
+package Entity.ClassDiagram;
 
 public class ClassDiagram {
 
