@@ -292,7 +292,12 @@ public class NuovoClassDiagramPage {
             }
         });
 
-
+        /*questi qua sono i metodi che spostano gli elementi:
+        * per il primo:
+        * dice l'angolo Ovest dell'oggetto nameLabel sta a tanti pixel quanti sono la larghezza della finestra fratto tre dall'angolo ovest dell'oggetto view
+        * e via così.
+        * poi metti uno a tanti pixel da quello a cui hai già messo un constraint etc etc.
+        * Se cerchi puoi trovare tutorial su come funziona lo springlayout*/
         layout.putConstraint(SpringLayout.WEST,nameLabel, (int) (FrameSetter.getjFrame().getWidth()/3), SpringLayout.WEST, view);
         layout.putConstraint(SpringLayout.NORTH,nameLabel, 30, SpringLayout.NORTH, view);
 
@@ -323,6 +328,7 @@ public class NuovoClassDiagramPage {
         layout.putConstraint(SpringLayout.WEST, add, (FrameSetter.getjFrame().getWidth())-(FrameSetter.getjFrame().getWidth()/4), SpringLayout.WEST, view);
         layout.putConstraint(SpringLayout.SOUTH, add, -30, SpringLayout.SOUTH, view);
 
+        //aggiungo tutti gli elementi al pane principale
         view.add(nameLabel);
         view.add(commentLabel);
         view.add(errMessageForMissingPackages);
@@ -335,6 +341,7 @@ public class NuovoClassDiagramPage {
         view.add(putInSpecificPackage);
         view.add(packageJList);
 
+        //setto il layout a quello che ho creato e a cui ho messo i constraint
         view.setLayout(layout);
 
         view.setVisible(true);
