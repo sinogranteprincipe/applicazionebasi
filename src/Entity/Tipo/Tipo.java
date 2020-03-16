@@ -100,4 +100,15 @@ public class Tipo {
         this.ePrimitivo = ePrimitivo;
     }
 
+    public Tipo(int id, String nome, String minValue, String maxValue, int idClasseDefinente, int idClassDiagram, int dimensioneArray, boolean eArray, boolean ePrimitivo) {
+        this.id = id;
+        this.nome = nome;
+        this.range = "[" + minValue +"..."+ maxValue +"]";
+        this.idClasseDefinente = idClasseDefinente;
+        this.idClassDiagram = idClassDiagram;
+        this.dimensioneArray = dimensioneArray;
+        this.eArray = eArray;
+        this.ePrimitivo = ePrimitivo;
+    }
+
 }

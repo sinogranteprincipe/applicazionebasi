@@ -1,5 +1,6 @@
 package Entity.Parametro;
 
+import Entity.Metodo.Metodo;
 import Entity.MyOracleConnection;
 import Entity.Package.Package;
 
@@ -18,14 +19,14 @@ public class ParametroDAO {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
 
-    public List<Parametro> readAllParametersInMethod(int aMethodId) throws SQLException {
+    public List<Parametro> readAllParametersInMethod(Metodo m) throws SQLException {
         List<Parametro> parameters = new ArrayList<>();
         Parametro p;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
         preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_METHOD);
-        preparedStatement.setInt(1, aMethodId);
+        preparedStatement.setInt(1, m.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
         while(result.next()){

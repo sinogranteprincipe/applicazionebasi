@@ -36,4 +36,12 @@ public class ClassDiagram {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "ClassDiagram{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", commento='" + commento + '\'' +
+                '}';
+    }
 }

@@ -35,4 +35,13 @@ public class GerarchiaClassi {
         this.idSottoClasse = idSottoClasse;
         this.idSuperClasse = idSuperClasse;
     }
+
+    @Override
+    public String toString() {
+        return "GerarchiaClassi{" +
+                "idClasseBase=" + idClasseBase +
+                ", idSottoClasse=" + idSottoClasse +
+                ", idSuperClasse=" + idSuperClasse +
+                '}';
+    }
 }

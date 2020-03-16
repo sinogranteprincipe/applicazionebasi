@@ -1,41 +1,27 @@
-import Entity.Package.Package;
-import Entity.Package.PackageDAO;
-import Entity.Tipo.Tipo;
-import Entity.Tipo.TipoDAO;
+import Entity.ClassDiagram.ClassDiagram;
+import Entity.ClassDiagram.ClassDiagramDAO;
+import View.Components.FrameSetter;
+import View.Components.MenuBarBuilder;
+import com.formdev.flatlaf.FlatDarculaLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.print.PrinterException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws PrinterException {
-        List<Package> packages;
-        List<Tipo> types;
-        JFrame hp = new JFrame("PROVA");
-        hp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        TextArea txt = new TextArea();
-        hp.add(txt);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        hp.setSize(screenSize.width, screenSize.height);
+    public static void main(String[] args) {
+        LookAndFeel lookAndFeel = new FlatDarculaLaf();
         try {
-            PackageDAO pDAO = new PackageDAO();
-            packages = pDAO.readAll();
-            TipoDAO tipoDAO = new TipoDAO();
-            types = tipoDAO.readAllPrimitives();
-            for(Package p: packages){
-                    txt.append(p.toString() +"\n");
-            }
-            for(Tipo t: types){
-                 txt.append(t.toString() +"\n");
-            }
-        }catch(SQLException e) {
-            System.out.println(e.toString());
+            UIManager.setLookAndFeel(lookAndFeel);
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
-
-        hp.setVisible(true);
-
-        return;
+        JFrame f = FrameSetter.getjFrame();
+        MenuBarBuilder menuBarBuilder = new MenuBarBuilder();
+        JMenuBar mb = MenuBarBuilder.getMenuBar();
+        menuBarBuilder.setHomePageMenuBar();
+        f.getContentPane().add(new JLabel("Benvenuto!\nL'applicazione consente la gestione di un database per la memorizzazione di class diagram.\n"));
+        f.setJMenuBar(mb);
+        f.setVisible(true);
     }
-}
+   }

@@ -1,14 +1,12 @@
 package Entity.Associazione;
 
+import Entity.ClassDiagram.ClassDiagram;
 import Entity.MyOracleConnection;
 import Entity.TipoDiAssociazione;
 import Entity.TipoDiVisibilita;
 import oracle.jdbc.AdditionalDatabaseMetaData;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +14,19 @@ public class AssociazioneDAO {
     Connection sharedDatabase;
 
     private static final String READ_ALL_IN_CLASS_DIAGRAM = "SELECT \"ID_ASSOCIAZIONE\", \"NOME\",\"RAFFIGURA\", \"NUMERO_MEMBRI\", \"VISIBILITA\", \"COMMENTO\", \"ID_CLASSE_DI_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\" FROM \"ASSOCIAZIONE\" WHERE \"ID_CLASS_DIAGRAM\"=?";
-
+    private static final String CREATE_ASSOCIAZIONE ="INSERT INTO \"ASSOCIAZIONE\"(\"NOME\",\"RAFFIGURA\",\"NUMERO_MEMBRI\",\"VISIBILITA\",\"COMMENTO\",\"ID_CLASSE_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\")VALUES(?,?,?,?,?,?,?)";
     public AssociazioneDAO() throws SQLException{
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
 
-    public List<Associazione> readAllInClassDiagram(int aClassDiagramId) throws SQLException {
+    public List<Associazione> readAllInClassDiagram(ClassDiagram cd) throws SQLException {
         List<Associazione> associazioni = new ArrayList<>();
         Associazione a;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
         preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASS_DIAGRAM);
-        preparedStatement.setInt(1, aClassDiagramId);
+        preparedStatement.setInt(1, cd.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
 
@@ -45,5 +43,20 @@ public class AssociazioneDAO {
         return associazioni;
     }
 
-
+    public boolean createAssociazione(Associazione a) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        preparedStatement = sharedDatabase.prepareStatement(CREATE_ASSOCIAZIONE);
+        preparedStatement.setString(1, a.getNome());
+        preparedStatement.setString(2, (a.getRaffigura().name()));
+        preparedStatement.setInt(3,a.getNumeroMembri());
+        preparedStatement.setString(4,a.getVisibilita().name());
+        preparedStatement.setString(5,a.getCommento());
+        if(a.getIdClasseDiAssociazione() < 0){
+            preparedStatement.setNull(6, Types.INTEGER);
+        }else{
+            preparedStatement.setInt(6, a.getIdClasseDiAssociazione());
+        }
+        preparedStatement.setInt(7, a.getIdClassDiagram());
+        return preparedStatement.execute();
+    }
 }

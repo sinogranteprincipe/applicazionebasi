@@ -1,28 +1,36 @@
 package Entity.ClassDiagramRiferimento;
 
 public class ClassDiagramRiferimento {
-    private String idPackage;
-    private String idClassDiagram;
+    private int idPackage;
+    private int idClassDiagram;
 
-    public ClassDiagramRiferimento(String idPackage, String idClassDiagram) {
-        this.idPackage = idPackage;
-        this.idClassDiagram = idClassDiagram;
-    }
-
-    public String getIdPackage() {
+    public int getIdPackage() {
         return idPackage;
     }
 
-    public void setIdPackage(String idPackage) {
+    public void setIdPackage(int idPackage) {
         this.idPackage = idPackage;
     }
 
-    public String getIdClassDiagram() {
+    public int getIdClassDiagram() {
         return idClassDiagram;
     }
 
-    public void setIdClassDiagram(String idClassDiagram) {
+    public void setIdClassDiagram(int idClassDiagram) {
         this.idClassDiagram = idClassDiagram;
     }
 
+    @Override
+    public String toString() {
+        return "ClassDiagramRiferimento{" +
+                "idPackage=" + idPackage +
+                ", idClassDiagram=" + idClassDiagram +
+                '}';
+    }
+
+    public ClassDiagramRiferimento(int idPackage, int idClassDiagram) {
+        this.idPackage = idPackage;
+        this.idClassDiagram = idClassDiagram;
+    }
 }
+

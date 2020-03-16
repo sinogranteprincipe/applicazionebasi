@@ -4,6 +4,8 @@ import Entity.RuoloAssociazione;
 import Entity.TipoDiClasse;
 import Entity.TipoDiVisibilita;
 
+import java.util.Objects;
+
 public class Classe {
 
     private int id;
@@ -103,6 +105,19 @@ public class Classe {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Classe classe = (Classe) o;
+        return getId() == classe.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
     public Classe(int id, String nome, TipoDiVisibilita visibilita, String stereotipo, RuoloAssociazione rappresenta, int idTipoDefinito, int idAssociazione, int idClassDiagram, TipoDiClasse tipoClasse) {
         this.id = id;
         this.nome = nome;
@@ -113,7 +128,5 @@ public class Classe {
         this.idAssociazione = idAssociazione;
         this.idClassDiagram = idClassDiagram;
         this.tipoClasse = tipoClasse;
-
-
     }
 }

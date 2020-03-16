@@ -1,33 +1,39 @@
 package Entity.Tipo;
 
+import Entity.ClassDiagram.ClassDiagram;
+import Entity.Classe.Classe;
+import Entity.Classe.ClasseDAO;
 import Entity.MyOracleConnection;
 import Entity.Package.Package;
+import Entity.RuoloAssociazione;
+import Entity.TipoDiClasse;
+import Entity.TipoDiVisibilita;
+import oracle.ucp.proxy.annotation.Pre;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.security.InvalidParameterException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoDAO {
+public class TipoDAO{
     Connection sharedDatabase;
 
     private static final String READ_ALL_IN_CLASS_DIAGRAM = "SELECT \"ID_TIPO\",\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\",\"E_PRIMITIVO\" FROM \"TIPO\" WHERE \"ID_CLASS_DIAGRAM\"=?";
     private static final String READ_ALL_PRIMITIVES = "SELECT \"ID_TIPO\",\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\",\"E_PRIMITIVO\" FROM \"TIPO\" WHERE \"E_PRIMITIVO\"=1";
+    private static final String ADD_USER_DEFINED_PRIMITIVE_TYPE= "INSERT INTO TIPO(\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\", \"E_PRIMITIVO\") VALUES (?,?,?,?,?,?,?)";
 
     public TipoDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
 
-    public List<Tipo> readAllInClassDiagram(int aClassDiagram) throws SQLException{
+    public List<Tipo> readAllInClassDiagram(ClassDiagram cd) throws SQLException{
         List<Tipo> types = new ArrayList<>();
         Tipo t;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
         preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASS_DIAGRAM);
-        preparedStatement.setInt(1, aClassDiagram);
+        preparedStatement.setInt(1, cd.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
         while(result.next()){
@@ -63,5 +69,32 @@ public class TipoDAO {
             preparedStatement.close();
         }
         return types;
+    }
+
+    public boolean addUserDefinedTipoPrimitivo(Tipo t) throws SQLException, InvalidParameterException {
+        PreparedStatement preparedStatement = null;
+        preparedStatement = sharedDatabase.prepareStatement(ADD_USER_DEFINED_PRIMITIVE_TYPE);
+        if(!(t.isePrimitivo())){
+            throw new InvalidParameterException("ERRORE: il tipo passato non è primitivo");
+        }else if(t.getIdClassDiagram()!=-1){
+            throw new InvalidParameterException("ERRORE: il tipo passato appartiene ad uno specifico class diagram");
+        }else if(t.getIdClasseDefinente()!=-1){
+            throw  new InvalidParameterException("ERRORE: un tipo primitivo non può essere associato ad una classe");
+        }else if(t.iseArray() && t.getDimensioneArray()<=0){
+            throw new InvalidParameterException("ERRORE: un tipo array deve avere una dimensione positiva");
+        }else{
+            preparedStatement.setString(1, t.getNome());
+            preparedStatement.setString(2, t.getRange());
+            preparedStatement.setNull(3, Types.INTEGER);
+            preparedStatement.setNull(4, Types.INTEGER);
+            preparedStatement.setInt(5, t.getDimensioneArray());
+            if(t.iseArray()) {
+                preparedStatement.setInt(6, 1);
+            }else{
+                preparedStatement.setInt(6, 0);
+            }
+            preparedStatement.setInt(7, 1);
+        }
+        return preparedStatement.execute();
     }
 }

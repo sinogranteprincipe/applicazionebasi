@@ -1,6 +1,7 @@
 package Entity.Metodo;
 
 import Entity.Attributo.Attributo;
+import Entity.Classe.Classe;
 import Entity.MyOracleConnection;
 import Entity.TipoDiVisibilita;
 
@@ -20,14 +21,14 @@ public class MetodoDAO {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
 
-    public List<Metodo> readAllInClasse(int aClassId) throws SQLException{
+    public List<Metodo> readAllInClasse(Classe c) throws SQLException{
         List<Metodo> methods = new ArrayList<>();
         Metodo m;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
         preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASSE);
-        preparedStatement.setInt(1, aClassId);
+        preparedStatement.setInt(1, c.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
 
