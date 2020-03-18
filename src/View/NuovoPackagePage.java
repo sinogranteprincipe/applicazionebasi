@@ -27,6 +27,9 @@ public class NuovoPackagePage {
     private JPanel errMessageWrapperForNome;
     private JPanel errMessageWrapperForComment;
 
+    private boolean areThereExceptions = false;
+    private boolean areThereErrors = false;
+
     private class NuovoPackagePageController {
 
         private static final int NAME_TOO_LONG = -1;
@@ -59,8 +62,10 @@ public class NuovoPackagePage {
         }
         private void addPackageButtonPressed(){
             int err = checkIfValidData();
-            System.out.println("err vale: " + err);
+            areThereErrors=false;
+            areThereExceptions=false;
             if(err<0){
+                areThereErrors = true;
                 add.setEnabled(false);
                 if(err==NAME_TOO_LONG){
                     errMessageForNome.setText("Il nome non può superare i 200 caratteri.");
@@ -88,6 +93,8 @@ public class NuovoPackagePage {
                         }
                         pDAO.createPackage(p);
                     }catch (SQLException e){
+                        areThereExceptions = true;
+
                         e.printStackTrace();
                     }
             }
@@ -198,6 +205,91 @@ public class NuovoPackagePage {
         view.add(add);
 
         view.setLayout(layout);
+
+        view.setVisible(true);
+        return;
+    }
+
+    public NuovoPackagePage(String p){
+
+        NuovoPackagePageController controller = new NuovoPackagePageController();
+
+        view = new JPanel();
+
+        add = new JButton("Crea Package");
+        nameLabel = new JLabel("      Inserisci il nome del Package:");
+        commentLabel = new JLabel("Inserisci il commento al Package:");
+        packageName = new JTextField("MAX 200 caratteri", 20);
+        packageComment = new JTextArea("MAX 4000 caratteri", 10, 20);
+        errMessageWrapperForNome = new JPanel();
+        errMessageWrapperForComment = new JPanel();
+        errMessageForNome = new JLabel("");
+        errMessageForComment = new JLabel("");
+
+        errMessageWrapperForNome.setVisible(false);
+        errMessageWrapperForNome.setBackground(ColorPicker.getColor("red"));
+        errMessageWrapperForNome.setSize(packageName.getSize());
+
+        errMessageWrapperForComment.setSize(packageName.getSize());
+        errMessageWrapperForComment.setVisible(false);
+        errMessageWrapperForComment.setBackground(ColorPicker.getColor("red"));
+
+        errMessageWrapperForComment.add(errMessageForComment);
+        errMessageWrapperForNome.add(errMessageForNome);
+
+        add.setEnabled(false);
+
+        errMessageForNome.setVisible(false);
+        errMessageForComment.setVisible(false);
+
+        packageComment.setLineWrap(true);
+        packageComment.setWrapStyleWord(true);
+        packageComment.setAutoscrolls(true);
+
+        commentContainer = new JScrollPane(packageComment);
+
+
+        packageName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                controller.cleanOnFocus(packageName);
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+                return;
+            }
+        });
+        packageComment.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                controller.cleanOnFocus(packageComment);
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+                return;
+            }
+        });
+
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.addPackageButtonPressed();
+                if(!areThereExceptions && !areThereErrors){
+                    JDialog parent = (JDialog) SwingUtilities.getWindowAncestor(view);
+                    parent.dispose();
+                }
+            }
+        });
+
+        view.add(nameLabel);
+        view.add(packageName);
+        view.add(errMessageWrapperForNome);
+        view.add(commentLabel);
+        view.add(commentContainer);
+        view.add(errMessageWrapperForComment);
+        view.add(add);
 
         view.setVisible(true);
         return;

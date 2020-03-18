@@ -37,6 +37,9 @@ public class NuovoClassDiagramPage {
     private JPanel errMessageWrapperForMissingPackages;
     private JLabel errMessageForMissingPackages;
 
+    private boolean areThereExceptions = false;
+    private boolean areThereErrors = false;
+
     /*questa qua è la classe che gestisce la pagina. */
     private class NuovoClassDiagramPageController{
 
@@ -109,9 +112,13 @@ public class NuovoClassDiagramPage {
         /*Se premo il bottone aggiungi diagramma*/
         private void addClassDiagramButtonPressed(){
             //controlla se i dati sono validi
+            areThereErrors = false;
+            areThereExceptions = false;
             int err = checkIfValidData();
             if(err<0){//se no scrivo vari messaggi d'errore
+                areThereErrors  =true;
                 if(err==NAME_TOO_LONG){
+
                     errMessageForNome.setText("Il nome non può superare i 200 caratteri");
                     errMessageForNome.setVisible(true);
                     errMessageWrapperForNome.setVisible(true);
@@ -152,12 +159,15 @@ public class NuovoClassDiagramPage {
                         //se non è in quello standard lo metto nel default
                         riferimentoDAO.addClassDiagramToPackage(new ClassDiagramRiferimento(0,idCD));
                     }
+                    FrameSetter.getjFrame().setContentPane(new ModificaClassDiagramPage().getView());
+                    FrameSetter.getjFrame().validate();
                 }catch(SQLException e){
+                    areThereExceptions = true;
                     //gestisco le eccezioni
                     int errorCode = e.getErrorCode();
                     switch(errorCode){
                         case 6510:
-                            errMessageForMissingPackages.setText("Il nome selezionato è già presente nel package selezionato. Inserisci un altro nome o cambia package.\n");
+                            errMessageForMissingPackages.setText("<html>Il nome selezionato è già presente <br>nel package selezionato.<br>Inserisci un altro nome.</html>\n");
                             errMessageForMissingPackages.setVisible(true);
                             errMessageWrapperForMissingPackages.setVisible(true);
                         default:
@@ -352,4 +362,142 @@ public class NuovoClassDiagramPage {
     }
 
     public JPanel getView(){return view;}
+
+
+    public NuovoClassDiagramPage(String p){
+
+        //creo il controllor
+        NuovoClassDiagramPageController controller = new NuovoClassDiagramPageController();
+
+
+        /*Inizializzo tutte le componenti*/
+        view = new JPanel();
+        add = new JButton("Crea Diagramma");
+        classDiagramName = new JTextField("MAX 300 caratteri", 20);
+        classDiagramComment = new JTextArea("MAX 4000 caratteri", 10, 20);
+        putInSpecificPackage = new JCheckBox("Vuoi inserire in un package specifico?");
+        packageJList = new JComboBox<>();
+        classDiagramComment = new JTextArea("MAX 4000 caratteri", 10, 20);
+        errMessageWrapperForNome = new JPanel();
+        errMessageWrapperForComment = new JPanel();
+        errMessageWrapperForMissingPackages = new JPanel();
+        errMessageForNome = new JLabel("");
+        errMessageForComment = new JLabel("");
+        errMessageForMissingPackages= new JLabel("");
+
+        nameLabel =    new JLabel("   Inserisci il nome del Class Diagram:");
+        commentLabel = new JLabel("Inserisci il commento al Class Diagram:");
+
+        /*aggiungo una linea vuota e poi popolo la lista di package*/
+        packageJList.addItem(p);
+
+        /*Imposta la dimensione della lista*/
+        packageJList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+        putInSpecificPackage.setHorizontalTextPosition(SwingConstants.LEFT);
+
+        putInSpecificPackage.setEnabled(false);
+        putInSpecificPackage.setSelected(true);
+
+        //metodo i messaggi d'errore invisibili con sfondo rosso
+        errMessageWrapperForNome.setVisible(false);
+        errMessageWrapperForNome.setBackground(ColorPicker.getColor("red"));
+        errMessageWrapperForComment.setVisible(false);
+        errMessageWrapperForComment.setBackground(ColorPicker.getColor("red"));
+        errMessageWrapperForMissingPackages.setVisible(false);
+        errMessageWrapperForMissingPackages.setBackground(ColorPicker.getColor("red"));
+
+        errMessageWrapperForMissingPackages.add(errMessageForMissingPackages);
+        errMessageWrapperForComment.add(errMessageForComment);
+        errMessageWrapperForNome.add(errMessageForNome);
+
+        add.setEnabled(false);
+
+        errMessageForNome.setVisible(false);
+        errMessageForComment.setVisible(false);
+        errMessageWrapperForMissingPackages.setVisible(false);
+
+        classDiagramComment.setLineWrap(true);
+        classDiagramComment.setWrapStyleWord(true);
+        classDiagramComment.setAutoscrolls(true);
+
+        /*L'area del commento sta dentro uno scroll pane, cioè con la barra, questo perché senno aggiungeva una linea sotto ogni
+         * volta che uno superava il limite inferiore*/
+        commentContainer = new JScrollPane(classDiagramComment);
+
+        //disabilito la checkbox, rendedola non cliccabile
+        packageJList.setEnabled(false);
+
+        /*Questo è un event listener, quando l'oggetto classDiagramContent guadagna il focus, cioè qualcuno ci clicca sopra
+         * quello che fa è richiamare il metodo del controller cleanOnFocus*/
+        classDiagramComment.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                controller.cleanOnFocus(classDiagramComment);
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+
+            }
+        });
+
+        /*Come sopra
+         * */
+        classDiagramName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                controller.cleanOnFocus(classDiagramName);
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+
+            }
+        });
+
+
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.addClassDiagramButtonPressed();
+                if(!areThereExceptions && !areThereErrors){
+                    JDialog parent = (JDialog) SwingUtilities.getWindowAncestor(view);
+                    parent.dispose();
+                }
+            }
+
+        });
+
+
+
+        /*questi qua sono i metodi che spostano gli elementi:
+         * per il primo:
+         * dice l'angolo Ovest dell'oggetto nameLabel sta a tanti pixel quanti sono la larghezza della finestra fratto tre dall'angolo ovest dell'oggetto view
+         * e via così.
+         * poi metti uno a tanti pixel da quello a cui hai già messo un constraint etc etc.
+         * Se cerchi puoi trovare tutorial su come funziona lo springlayout*/
+
+
+        //aggiungo tutti gli elementi al pane principale
+        view.add(nameLabel);
+        view.add(classDiagramName);
+        view.add(errMessageWrapperForNome);
+        view.add(commentLabel);
+        view.add(commentContainer);
+        view.add(errMessageWrapperForComment);
+        view.add(errMessageWrapperForMissingPackages);
+        view.add(putInSpecificPackage);
+        view.add(packageJList);
+        view.add(add);
+
+
+        //setto il layout a quello che ho creato e a cui ho messo i constraint
+
+        view.setVisible(true);
+        return;
+    }
+
+
+
 }

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
+import java.util.Map;
+
 import Entity.Package.Package;
 
 public class ClassDiagramDAO  {
@@ -16,6 +18,8 @@ public class ClassDiagramDAO  {
     private static final String READ_ALL_IN_PACKAGE ="SELECT \"CLASS_DIAGRAM.ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM.NOME\", \"CLASS_DIAGRAM.COMMENTO\" FROM \"CD_DI_RIFERIMENTO\" INNER JOIN \"CLASS_DIAGRAM\" ON \"CD_DI_RIFERIMENTO.ID_PACKAGE\" = ?";
     private static final String CREATE_DATABASE ="INSERT INTO \"CLASS_DIAGRAM\"(\"NOME\", \"COMMENTO\") VALUES (?,?)";
     private static final String GET_LAST_INSERTED_ID="SELECT \"ID_CLASS_DIAGRAM\" FROM \"CLASS_DIAGRAM\" WHERE \"ID_CLASS_DIAGRAM\" = (SELECT MAX(\"ID_CLASS_DIAGRAM\") FROM \"CLASS_DIAGRAM\")";
+    private static final String READ_ALL_BY_NAME = "SELECT \"CLASS_DIAGRAM.ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM.NOME\", \"CLASS_DIAGRAM.COMMENTO\" FROM \"CLASS_DIAGRAM\" ON \"CLASS_DIAGRAM.NOME\" = ?";
+
     public ClassDiagramDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
@@ -52,6 +56,31 @@ public class ClassDiagramDAO  {
             preparedStatement.close();
         }
         return res;
+    }
+
+    public List<ClassDiagram> readByName(String aName) throws SQLException {
+
+
+        List<ClassDiagram> classdiagrams = new ArrayList<>();
+        ClassDiagram c;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_BY_NAME);
+        preparedStatement.setString(1, aName);
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+        while(result.next()){
+            c = new ClassDiagram(result.getInt(1), result.getString(2), result.getString(3));
+            classdiagrams.add(c);
+        }
+        if(result != null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return classdiagrams;
     }
 
     public int getLastInsertedId() throws SQLException{

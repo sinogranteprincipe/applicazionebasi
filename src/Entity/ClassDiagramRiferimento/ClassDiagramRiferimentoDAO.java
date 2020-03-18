@@ -11,20 +11,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ClassDiagramRiferimentoDAO {
     Connection sharedDatabase;
 
-    private static final String READ_ALL_CLASS_DIAGRAM_IN_PACKAGE = "SELECT \"ID_CLASS_DIAGRAM\" FROM \"CD_DI_RIFERIMENTO\" WHERE \"ID_PACKAGE\"=?";
-    private static final String READ_ALL_PACKAGES_OF_A_CLASS_DIAGRAM = "SELECT \"ID_PACKAGE\" FROM \"CD_DI_RIFERIMENTO\" WHERE \"ID_CLASS_DIAGRAM\"=?";
+    private static final String READ_ALL_CLASS_DIAGRAM_IN_PACKAGE = "SELECT \"ID_PACKAGE\",\"ID_CLASS_DIAGRAM\" FROM \"CD_DI_RIFERIMENTO\" WHERE \"ID_PACKAGE\"=?";
+    private static final String READ_ALL_PACKAGES_OF_A_CLASS_DIAGRAM = "SELECT \"ID_PACKAGE\",\"ID_CLASS_DIAGRAM\" FROM \"CD_DI_RIFERIMENTO\" WHERE \"ID_CLASS_DIAGRAM\"=?";
     private static final String ADD_CLASS_DIAGRAM_TO_PACKAGE = "INSERT INTO \"CD_DI_RIFERIMENTO\"(\"ID_CLASS_DIAGRAM\", \"ID_PACKAGE\") VALUES (?,?)";
 
     public ClassDiagramRiferimentoDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
 
-    public List<Integer> readAllDiagramsOfAPackage(Package pkg) throws SQLException{
-        List<Integer> l = new ArrayList<>();
+    public List<ClassDiagramRiferimento> readAllDiagramsOfAPackage(Package pkg) throws SQLException{
+        List<ClassDiagramRiferimento> l = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
@@ -34,7 +35,7 @@ public class ClassDiagramRiferimentoDAO {
         result = preparedStatement.getResultSet();
 
         while(result.next()){
-            l.add(result.getInt(1));
+            l.add(new ClassDiagramRiferimento(result.getInt(1), result.getInt(2)));
         }
         if(result!=null){
             result.close();
@@ -45,8 +46,8 @@ public class ClassDiagramRiferimentoDAO {
         return l;
     }
 
-    public List<Integer> readAllPackagesOfAClassDiagram(ClassDiagram cd) throws SQLException{
-        List<Integer> l = new ArrayList<>();
+    public List<ClassDiagramRiferimento> readAllPackagesOfAClassDiagram(ClassDiagram cd) throws SQLException{
+        List<ClassDiagramRiferimento> l = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
 
@@ -56,7 +57,7 @@ public class ClassDiagramRiferimentoDAO {
         result = preparedStatement.getResultSet();
 
         while(result.next()){
-            l.add(result.getInt(1));
+            l.add(new ClassDiagramRiferimento(result.getInt(1), result.getInt(2)));
         }
         if(result!=null){
             result.close();

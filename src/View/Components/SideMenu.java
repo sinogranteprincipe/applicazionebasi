@@ -3,6 +3,7 @@ package View.Components;
 import Entity.ClassDiagram.ClassDiagram;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SideMenu {
 
@@ -39,7 +40,11 @@ public class SideMenu {
         addClasse = new JButton(IconMaker.getAddIcon());
         modifyClasse = new JButton(IconMaker.getEditIcon());
 
-
+        classDiagramContainer.setSize(10, 10);
+        buttonContainer.setSize(FrameSetter.getjFrame().getWidth()/4, FrameSetter.getjFrame().getHeight()/3);
+/*
+        layout.putConstraint(SpringLayout.NORTH,classDiagramContainer, 5, SpringLayout.SOUTH, view);
+        layout.putConstraint(SpringLayout.NORTH, buttonContainer, 5, SpringLayout.SOUTH, classDiagramContainer);
         layout.putConstraint(SpringLayout.WEST, classLabel, 5, SpringLayout.WEST, buttonContainer);
 
         layout.putConstraint(SpringLayout.NORTH, classLabel, 5, SpringLayout.SOUTH, buttonContainer);
@@ -55,10 +60,9 @@ public class SideMenu {
 
         layout.putConstraint(SpringLayout.NORTH, addAssociation, 0, SpringLayout.NORTH, associationLabel);
         layout.putConstraint(SpringLayout.NORTH, modifyAssociazione, 0, SpringLayout.NORTH, associationLabel);
+*/
 
         view.setVisible(true);
-        classDiagramContainer.setVisible(true);
-        classDiagram.setVisible(true);
         buttonContainer.setVisible(true);
         addAssociation.setVisible(true);
         modifyAssociazione.setVisible(true);
@@ -66,8 +70,10 @@ public class SideMenu {
         classLabel.setVisible(true);
         addClasse.setVisible(true);
         modifyClasse.setVisible(true);
+        classDiagramContainer.setVisible(true);
+        classDiagram.setVisible(true);
 
-        classDiagramContainer.add(classDiagram);
+        classDiagramContainer.setViewportView(classDiagram);
 
         buttonContainer.add(modifyAssociazione);
         buttonContainer.add(associationLabel);
@@ -75,9 +81,9 @@ public class SideMenu {
         buttonContainer.add(classLabel);
         buttonContainer.add(addClasse);
         buttonContainer.add(modifyClasse);
-        buttonContainer.setLayout(layout);
 
-      //  view.add(classDiagramContainer);
+        view.add(classDiagramContainer);
         view.add(buttonContainer);
+     //   view.setLayout(layout);
     }
 }

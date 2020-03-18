@@ -3,6 +3,7 @@ package View;
 import View.Components.SideMenu;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ModificaClassDiagramPage {
 
