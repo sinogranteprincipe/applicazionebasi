@@ -2,6 +2,7 @@ package View.Components;
 
 import View.NuovoClassDiagramPage;
 import View.NuovoPackagePage;
+import View.VisualizzaClassDiagramPage;
 import View.VisualizzaPackagesPage;
 
 import javax.swing.*;
@@ -32,12 +33,8 @@ public class MenuBarBuilder {
         }
         private void  visualizzaClassDiagramClicked(){
             JFrame jFrame = FrameSetter.getjFrame();
-            for(Component c : jFrame.getContentPane().getComponents() ){
-                if(c instanceof JLabel){
-                    JLabel j = (JLabel) c;
-                    j.setText("Hai premuto Visualizza Diagramma");
-                }
-            }
+            jFrame.setContentPane(new VisualizzaClassDiagramPage().getView());
+            jFrame.validate();
             return;
         }
     }

@@ -57,7 +57,7 @@ public class PackageDAO {
         if(preparedStatement != null){
             preparedStatement.close();
         }
-        System.out.println(p.toString());
+
         return p;
     }
 

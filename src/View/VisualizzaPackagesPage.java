@@ -28,6 +28,7 @@ public class VisualizzaPackagesPage {
                 l = packageDAO.readAll();
                 for(Package p: l){
                     dataModel.addRow(new String[]{p.getNome(), p.getCommento()});
+
                 }
             }catch (SQLException e){
                 e.printStackTrace();
@@ -42,13 +43,14 @@ public class VisualizzaPackagesPage {
     public VisualizzaPackagesPage(){
         VisualizzaPackagesPageController controller = new VisualizzaPackagesPageController();
         DefaultTableModel dataModel = new DefaultTableModel();
-        dataModel.addColumn("Nome");
-        dataModel.addColumn("Commento");
-        dataModel.addRow(new String[]{"Nome", "Commento"});
         controller.populateTable(dataModel);
         view = new JPanel();
         table = new JTable(dataModel);
-        view.add(table);
+        tableScrollPane = new JScrollPane();
+        tableScrollPane.add(table);
         view.setVisible(true);
+
+
+
     }
 }

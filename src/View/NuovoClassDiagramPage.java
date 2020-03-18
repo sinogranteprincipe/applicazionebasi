@@ -75,19 +75,13 @@ public class NuovoClassDiagramPage {
         private void cleanOnFocus(JTextField a){
             a.setText("");
             add.setEnabled(true);
-            if(errMessageWrapperForNome.isVisible()){
-                errMessageWrapperForNome.setVisible(false);
-            }
+
             return;
         }
 
         private void cleanOnFocus(JTextArea a){
             a.setText("");
             add.setEnabled(true);
-            if(errMessageWrapperForNome.isVisible()){
-                errMessageWrapperForNome.setVisible(false);
-            }
-
             return;
         }
 
@@ -119,18 +113,22 @@ public class NuovoClassDiagramPage {
             if(err<0){//se no scrivo vari messaggi d'errore
                 if(err==NAME_TOO_LONG){
                     errMessageForNome.setText("Il nome non può superare i 200 caratteri");
+                    errMessageForNome.setVisible(true);
                     errMessageWrapperForNome.setVisible(true);
                 }
                 if(err == COMMENT_TOO_LONG){
                     errMessageForComment.setText("Il commento non può superare i 4000 caratteri");
+                    errMessageForComment.setVisible(true);
                     errMessageWrapperForComment.setVisible(true);
                 }
                 if(err == MISSING_NAME){
                     errMessageForNome.setText("Devi inserire un nome");
+                    errMessageForNome.setVisible(true);
                     errMessageWrapperForNome.setVisible(true);
                 }
                 if(err == MISSING_PACKAGE){
                     errMessageForMissingPackages.setText("Devi selezionare un package o deselezionare la chechkbox");
+                    errMessageForMissingPackages.setVisible(true);
                     errMessageWrapperForMissingPackages.setVisible(true);
                 }
             }else{//altrimenti
@@ -156,11 +154,15 @@ public class NuovoClassDiagramPage {
                     }
                 }catch(SQLException e){
                     //gestisco le eccezioni
-                    if(e.getErrorCode() == 6510){
-                        errMessageForMissingPackages.setText("Il nome selezionato è già presente nel package selezionato.\nInserisci un altro nome o cambia package.\n");
-                        errMessageWrapperForMissingPackages.setVisible(true);
-                    };
-                    e.printStackTrace();
+                    int errorCode = e.getErrorCode();
+                    switch(errorCode){
+                        case 6510:
+                            errMessageForMissingPackages.setText("Il nome selezionato è già presente nel package selezionato. Inserisci un altro nome o cambia package.\n");
+                            errMessageForMissingPackages.setVisible(true);
+                            errMessageWrapperForMissingPackages.setVisible(true);
+                        default:
+                             System.out.println(e.getErrorCode());
+                    }
                 }
             }
         }
@@ -211,8 +213,8 @@ public class NuovoClassDiagramPage {
         errMessageWrapperForNome.setBackground(ColorPicker.getColor("red"));
         errMessageWrapperForComment.setVisible(false);
         errMessageWrapperForComment.setBackground(ColorPicker.getColor("red"));
-        errMessageForMissingPackages.setVisible(false);
-        errMessageForMissingPackages.setBackground(ColorPicker.getColor("red"));
+        errMessageWrapperForMissingPackages.setVisible(false);
+        errMessageWrapperForMissingPackages.setBackground(ColorPicker.getColor("red"));
 
         errMessageWrapperForMissingPackages.add(errMessageForMissingPackages);
         errMessageWrapperForComment.add(errMessageForComment);
@@ -222,6 +224,7 @@ public class NuovoClassDiagramPage {
 
         errMessageForNome.setVisible(false);
         errMessageForComment.setVisible(false);
+        errMessageWrapperForMissingPackages.setVisible(false);
 
         classDiagramComment.setLineWrap(true);
         classDiagramComment.setWrapStyleWord(true);
@@ -298,19 +301,19 @@ public class NuovoClassDiagramPage {
         * e via così.
         * poi metti uno a tanti pixel da quello a cui hai già messo un constraint etc etc.
         * Se cerchi puoi trovare tutorial su come funziona lo springlayout*/
-        layout.putConstraint(SpringLayout.WEST,nameLabel, (int) (FrameSetter.getjFrame().getWidth()/3), SpringLayout.WEST, view);
+        layout.putConstraint(SpringLayout.WEST,nameLabel, (int) (FrameSetter.getjFrame().getWidth()/4), SpringLayout.WEST, view);
         layout.putConstraint(SpringLayout.NORTH,nameLabel, 30, SpringLayout.NORTH, view);
 
-        layout.putConstraint(SpringLayout.WEST, commentLabel, 0, SpringLayout.WEST, nameLabel);
+        layout.putConstraint(SpringLayout.WEST, commentLabel, 0 , SpringLayout.WEST, nameLabel);
         layout.putConstraint(SpringLayout.NORTH,commentLabel, 30, SpringLayout.NORTH, errMessageWrapperForNome);
 
-        layout.putConstraint(SpringLayout.WEST, classDiagramName, 200, SpringLayout.WEST, nameLabel);
+        layout.putConstraint(SpringLayout.WEST, classDiagramName, 220, SpringLayout.WEST, nameLabel);
         layout.putConstraint(SpringLayout.NORTH,classDiagramName, 30 , SpringLayout.NORTH, view);
 
         layout.putConstraint(SpringLayout.WEST, errMessageWrapperForNome, 0, SpringLayout.WEST, classDiagramName);
         layout.putConstraint(SpringLayout.NORTH,errMessageWrapperForNome, 30 , SpringLayout.NORTH, classDiagramName);
 
-        layout.putConstraint(SpringLayout.WEST,commentContainer, 200, SpringLayout.WEST, commentLabel);
+        layout.putConstraint(SpringLayout.WEST,commentContainer, 220, SpringLayout.WEST, commentLabel);
         layout.putConstraint(SpringLayout.NORTH, commentContainer, 30, SpringLayout.NORTH, errMessageWrapperForNome);
 
         layout.putConstraint(SpringLayout.WEST, errMessageWrapperForComment, 0, SpringLayout.WEST, commentContainer);
@@ -322,8 +325,8 @@ public class NuovoClassDiagramPage {
         layout.putConstraint(SpringLayout.WEST, packageJList, 0, SpringLayout.WEST, errMessageWrapperForComment);
         layout.putConstraint(SpringLayout.NORTH, packageJList, -5, SpringLayout.NORTH, putInSpecificPackage );
 
-        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForMissingPackages, 0,SpringLayout.WEST, packageJList);
-        layout.putConstraint(SpringLayout.NORTH, errMessageWrapperForMissingPackages, 30, SpringLayout.NORTH, packageJList);
+        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForMissingPackages, 0,SpringLayout.WEST, putInSpecificPackage);
+        layout.putConstraint(SpringLayout.NORTH, errMessageWrapperForMissingPackages, 30, SpringLayout.NORTH, putInSpecificPackage);
 
         layout.putConstraint(SpringLayout.WEST, add, (FrameSetter.getjFrame().getWidth())-(FrameSetter.getjFrame().getWidth()/4), SpringLayout.WEST, view);
         layout.putConstraint(SpringLayout.SOUTH, add, -30, SpringLayout.SOUTH, view);
@@ -331,7 +334,7 @@ public class NuovoClassDiagramPage {
         //aggiungo tutti gli elementi al pane principale
         view.add(nameLabel);
         view.add(commentLabel);
-        view.add(errMessageForMissingPackages);
+        view.add(errMessageWrapperForMissingPackages);
         view.add(errMessageWrapperForComment);
         view.add(errMessageWrapperForNome);
         view.add(classDiagramName);

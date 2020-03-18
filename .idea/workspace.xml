@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98cded5a-1587-4702-9504-bbab1e1be3f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/View/Components/IconMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Components/ModifyClasseOptionPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Resources/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Resources/edit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Resources/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/VisualizzaClassDiagramPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Package/PackageDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Package/PackageDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/ColorPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/ColorPicker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Components/MenuBarBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/MenuBarBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/SideMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/SideMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/NuovoClassDiagramPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/NuovoClassDiagramPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/NuovoPackagePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/NuovoPackagePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/VisualizzaPackagesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/VisualizzaPackagesPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +46,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/flatlaf-0.27.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/View/Resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src\View" />
       <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src\View\Resources" />
     </key>
   </component>
   <component name="RunManager">
@@ -88,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584383825310</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="things">
+      <created>1584384142216</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584384142216</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -112,22 +134,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.728@0.0.1366.728" timestamp="1584008021362" />
-    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser" timestamp="1584377180992">
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser" timestamp="1584462442118">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584377180992" />
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584462442118" />
     <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584008312118">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1584008312118" />
-    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1584036931998">
+    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1584461140783">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584036931998" />
-    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584211733786">
+    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584461140783" />
+    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584441544126">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1584211733786" />
+    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1584441544126" />
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584205409935">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -136,10 +158,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="451" y="188" key="#com.intellij.tools.ToolEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584294277100" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1584383823606">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1584384140485">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584383823606" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584384140485" />
     <state x="899" y="147" key="FileChooserDialogImpl" timestamp="1584356930349">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -148,22 +170,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="544" y="257" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1584027650327" />
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1584380870814">
+    <state width="1323" height="46" key="GridCell.Tab.0.bottom" timestamp="1584463222750">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584380870814" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1584380870814">
+    <state width="1323" height="46" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584463222750" />
+    <state width="1323" height="46" key="GridCell.Tab.0.center" timestamp="1584463222750">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584380870814" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1584380870814">
+    <state width="1323" height="46" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584463222750" />
+    <state width="1323" height="46" key="GridCell.Tab.0.left" timestamp="1584463222750">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584380870814" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1584380870814">
+    <state width="1323" height="46" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584463222750" />
+    <state width="1323" height="46" key="GridCell.Tab.0.right" timestamp="1584463222750">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584380870814" />
+    <state width="1323" height="46" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584463222750" />
     <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1584380870814">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -184,18 +206,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="395" y="80" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1584090607526" />
-    <state x="184" y="0" key="SettingsEditor" timestamp="1584356932805">
+    <state x="184" y="198" width="1040" height="530" key="SettingsEditor" timestamp="1584461145224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584356932805" />
+    <state x="184" y="198" width="1040" height="530" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584461145224" />
     <state x="444" y="197" key="SimpleOpenTaskDialog" timestamp="1584181909387">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="444" y="197" key="SimpleOpenTaskDialog/0.0.1366.728@0.0.1366.728" timestamp="1584181909387" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584383840145">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584384151056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584383840145" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584384151056" />
     <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1584181408706">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

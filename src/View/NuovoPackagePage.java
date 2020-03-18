@@ -51,16 +51,10 @@ public class NuovoPackagePage {
         private void cleanOnFocus(JTextField a){
             a.setText(null);
             add.setEnabled(true);
-            if(errMessageWrapperForNome.isVisible()){
-                errMessageWrapperForNome.setVisible(false);
-            }
             return;
         }
         private void cleanOnFocus(JTextArea a){
             a.setText(null);
-            if(errMessageWrapperForComment.isVisible()){
-                errMessageWrapperForComment.setVisible(false);
-            }
             return;
         }
         private void addPackageButtonPressed(){
@@ -122,6 +116,9 @@ public class NuovoPackagePage {
 
         errMessageWrapperForNome.setVisible(false);
         errMessageWrapperForNome.setBackground(ColorPicker.getColor("red"));
+        errMessageWrapperForNome.setSize(packageName.getSize());
+
+        errMessageWrapperForComment.setSize(packageName.getSize());
         errMessageWrapperForComment.setVisible(false);
         errMessageWrapperForComment.setBackground(ColorPicker.getColor("red"));
 
@@ -179,13 +176,13 @@ public class NuovoPackagePage {
         layout.putConstraint(SpringLayout.WEST, packageName, 200, SpringLayout.WEST, nameLabel);
         layout.putConstraint(SpringLayout.NORTH,packageName, 30 , SpringLayout.NORTH, view);
 
-        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForNome, 0, SpringLayout.WEST, packageName);
+        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForNome, 57, SpringLayout.WEST, packageName);
         layout.putConstraint(SpringLayout.NORTH,errMessageWrapperForNome, 30 , SpringLayout.NORTH, packageName);
 
         layout.putConstraint(SpringLayout.WEST,commentContainer, 200, SpringLayout.WEST, commentLabel);
         layout.putConstraint(SpringLayout.NORTH, commentContainer, 30, SpringLayout.NORTH, errMessageWrapperForNome);
 
-        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForComment, 0, SpringLayout.WEST, commentContainer);
+        layout.putConstraint(SpringLayout.WEST, errMessageWrapperForComment, 30, SpringLayout.WEST, commentContainer);
         layout.putConstraint(SpringLayout.NORTH,errMessageWrapperForComment, 10,SpringLayout.SOUTH, commentContainer);
 
         layout.putConstraint(SpringLayout.WEST, add, (FrameSetter.getjFrame().getWidth())-(FrameSetter.getjFrame().getWidth()/4), SpringLayout.WEST, view);
