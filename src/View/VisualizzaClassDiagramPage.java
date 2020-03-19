@@ -15,10 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.util.*;
 import java.sql.SQLException;
 
@@ -33,6 +30,8 @@ public class VisualizzaClassDiagramPage {
     JPanel errMessageWrapper;
     JLabel errMessage;
     JLabel prompt;
+    DefaultTableModel tableModel;
+
     private class VisualizzaClassDiagramPageController{
 
         private boolean areTherePackages;
@@ -40,7 +39,6 @@ public class VisualizzaClassDiagramPage {
 
         public void cleanSearchBarOnFocus(){
             searchBar.setText("");
-            searchButton.setEnabled(true);
             return;
         }
 
@@ -64,9 +62,10 @@ public class VisualizzaClassDiagramPage {
             }
         }
 
-        private void populateTable(DefaultTableModel tableModel){
+        private DefaultTableModel populateTable(){
             String packageName = (String) currentPackages.getSelectedItem();
             String toSearch = searchBar.getText();
+            DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.addColumn("Nome");
             tableModel.addColumn("Commento");
             tableModel.addColumn("In Package");
@@ -77,32 +76,60 @@ public class VisualizzaClassDiagramPage {
                     ClassDiagramDAO classDiagramDAO = new ClassDiagramDAO();
 
                     Package p = packageDAO.readPackageByName(packageName);
-
                     List<ClassDiagramRiferimento> riferimenti = classDiagramRiferimentoDAO.readAllDiagramsOfAPackage(p);
 
                     List<ClassDiagram> diagrams = classDiagramDAO.readAllInPackage(p);
-                    if(toSearch != null || toSearch != "" || toSearch != "Inserisci il nome del Class Diagram"){
+
+                    if(toSearch.compareTo("Inserisci il nome del Class Diagram")!=0){
                         for(ClassDiagram cd : diagrams){
                             if(cd.getNome() != toSearch){
                                 diagrams.remove(cd);
                             }
                         }
                         if(diagrams.isEmpty()){
-                            //gestire non trovato
+                            errMessage.setText("Il diagramma non è stato trovato");
                         }else{
                             for(ClassDiagram cd : diagrams) {
+                                System.out.println(cd.toString());
                                 tableModel.addRow(new String[]{cd.getNome(), cd.getCommento(), p.getNome()});
                             }
                         }
                     }else{
                         for(ClassDiagram cd : diagrams) {
+                            System.out.println(cd.toString());
                             tableModel.addRow(new String[]{cd.getNome(), cd.getCommento(), p.getNome()});
                         }
+                        return tableModel;
                     }
                 }catch (SQLException e){
                     e.printStackTrace();
                 }
+            }else{
+                try{
+                    ClassDiagramRiferimentoDAO classDiagramRiferimentoDAO = new ClassDiagramRiferimentoDAO();
+                    PackageDAO packageDAO = new PackageDAO();
+                    ClassDiagramDAO classDiagramDAO = new ClassDiagramDAO();
+                    Package p;
+                    List<ClassDiagramRiferimento> riferimentoList;
+                    List<ClassDiagram> diagrams;
+                    if(toSearch != null || toSearch != "" || toSearch != "Inserisci il nome del Class Diagram"){
+                        diagrams = classDiagramDAO.readByName(searchBar.getText());
+                        for(ClassDiagram cd: diagrams){
+                            riferimentoList = classDiagramRiferimentoDAO.readAllPackagesOfAClassDiagram(cd);
+                            for(ClassDiagramRiferimento cdrif : riferimentoList){
+                                p = packageDAO.readPackageById(cdrif.getIdPackage());
+                                tableModel.addRow(new String[]{cd.getNome(), cd.getCommento(), p.getNome()});
+                            }
+                        }
+                    }else{
+
+                    }
+                    return  tableModel;
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
             }
+            return null;
         }
 
         private void goToSearchedDiagramPage() {
@@ -135,25 +162,13 @@ public class VisualizzaClassDiagramPage {
         errMessageWrapper.add(errMessage);
         errMessageWrapper.setBackground(ColorPicker.getColor("red"));
 
-        DefaultTableModel tableModel = new DefaultTableModel();
-
-        tableModel.addColumn("Nome");
-        tableModel.addColumn("Commento");
-        tableModel.addColumn("Package");
-
-        classDiagramTable = new JTable(tableModel);
-
-
         currentPackages.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
         currentPackages.addItem("");
 
         tablePane.setViewportView(classDiagramTable);
 
-
-
         controller.populatePackageList(currentPackages);
 
-        searchButton.setEnabled(false);
 
         SpringLayout layout = new SpringLayout();
 
@@ -190,7 +205,14 @@ public class VisualizzaClassDiagramPage {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.populateTable(tableModel);
+              searchButton.setEnabled(false);
+              searchBar.setEnabled(false);
+              tableModel =  controller.populateTable();
+              classDiagramTable = new JTable(tableModel);
+              tablePane.setViewportView(classDiagramTable);
+              searchButton.setEnabled(true);
+              searchBar.setEnabled(true);
+              FrameSetter.getjFrame().validate();
             }
         });
 
@@ -203,6 +225,31 @@ public class VisualizzaClassDiagramPage {
 
             @Override
             public void focusLost(FocusEvent focusEvent) {
+
+            }
+        });
+        searchBar.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if(keyEvent.getKeyCode()==KeyEvent.VK_ENTER){
+                    searchButton.setEnabled(false);
+                    searchBar.setEnabled(false);
+                    tableModel =  controller.populateTable();
+                    classDiagramTable = new JTable(tableModel);
+                    tablePane.setViewportView(classDiagramTable);
+                    searchButton.setEnabled(true);
+                    searchBar.setEnabled(true);
+                    FrameSetter.getjFrame().validate();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
 
             }
         });

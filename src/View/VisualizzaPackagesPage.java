@@ -39,7 +39,6 @@ public class VisualizzaPackagesPage {
     JPanel buttonContainer;
     JButton addDiagram;
     JButton addPackage;
-    JButton modifyPackage;
     DefaultTableModel dataModel;
 
     private class VisualizzaPackagesPageController{
@@ -93,13 +92,10 @@ public class VisualizzaPackagesPage {
         buttonContainer = new JPanel();
         addDiagram = new JButton("Aggiungi Class Diagram");
         addPackage = new JButton("Aggiungi Package");
-        modifyPackage = new JButton("Modifica Package");
 
         buttonContainer.add(addDiagram);
-        buttonContainer.add(modifyPackage);
         buttonContainer.add(addPackage);
 
-        modifyPackage.setEnabled(false);
         addDiagram.setEnabled(false);
 
         buttonContainer.setVisible(true);
@@ -135,8 +131,7 @@ public class VisualizzaPackagesPage {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(modifyPackage.isEnabled()==false && addDiagram.isEnabled() == false){
-                    modifyPackage.setEnabled(true);
+                if(addDiagram.isEnabled() == false){
                     addDiagram.setEnabled(true);
                 }
             }

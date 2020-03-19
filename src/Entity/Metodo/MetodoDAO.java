@@ -5,18 +5,15 @@ import Entity.Classe.Classe;
 import Entity.MyOracleConnection;
 import Entity.TipoDiVisibilita;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class MetodoDAO {
     Connection sharedDatabase;
 
     private static final String READ_ALL_IN_CLASSE ="SELECT \"ID_METODO\" , \"NOME\" ,\"HA_PARAMETRI\" ,\"ID_TIPO_RITORNO\" , \"VISIBILITA\" , \"ID_CLASSE\" , \"POSIZIONE\"  FROM \"METODO\" WHERE \"ID_CLASSE\" = ?";
-
+    private static final String CREATE_METHOD = "INSERT INTO METODO(\"ID_METODO\", \"NOME\", \"HA_PARAMETRI\", \"ID_TIPO_RITORNO\", \"VISIBILITA\", ID_CLASSE\", \"POSIZIONE\")VALUES(?,?,?,?,?,?,?)";
     public MetodoDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
@@ -73,10 +70,17 @@ public class MetodoDAO {
         PreparedStatement preparedStatement = null;
         preparedStatement = sharedDatabase.prepareStatement(CREATE_METHOD);
         preparedStatement.setString(1, m.getNome());
-        preparedStatement.setInt(2,m.getIdTipoDiRitorno());
-        preparedStatement.setString(3,m.getVisibilita().name());
-        preparedStatement.setInt(4,m.getIdClasse());
-        preparedStatement.setInt(5,m.getPosizione());
+        if(m.isHaParametri())
+             preparedStatement.setInt(2, 1);
+        else
+            preparedStatement.setInt(2, 0);
+        if(m.getIdTipoDiRitorno()>0)
+            preparedStatement.setInt(3,m.getIdTipoDiRitorno());
+        else
+            preparedStatement.setNull(3, Types.INTEGER);
+        preparedStatement.setString(4,m.getVisibilita().name());
+        preparedStatement.setInt(5,m.getIdClasse());
+        preparedStatement.setInt(6,m.getPosizione());
         return preparedStatement.execute();
     }
 }

@@ -15,10 +15,11 @@ import Entity.Package.Package;
 public class ClassDiagramDAO  {
     Connection sharedDatabase;
 
-    private static final String READ_ALL_IN_PACKAGE ="SELECT \"CLASS_DIAGRAM.ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM.NOME\", \"CLASS_DIAGRAM.COMMENTO\" FROM \"CD_DI_RIFERIMENTO\" INNER JOIN \"CLASS_DIAGRAM\" ON \"CD_DI_RIFERIMENTO.ID_PACKAGE\" = ?";
+    private static final String READ_ALL_IN_PACKAGE ="SELECT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM (\"CLASS_DIAGRAM\" INNER JOIN \"CD_DI_RIFERIMENTO\" ON  \"CD_DI_RIFERIMENTO\".\"ID_PACKAGE\" = ?)";
     private static final String CREATE_DATABASE ="INSERT INTO \"CLASS_DIAGRAM\"(\"NOME\", \"COMMENTO\") VALUES (?,?)";
     private static final String GET_LAST_INSERTED_ID="SELECT \"ID_CLASS_DIAGRAM\" FROM \"CLASS_DIAGRAM\" WHERE \"ID_CLASS_DIAGRAM\" = (SELECT MAX(\"ID_CLASS_DIAGRAM\") FROM \"CLASS_DIAGRAM\")";
-    private static final String READ_ALL_BY_NAME = "SELECT \"CLASS_DIAGRAM.ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM.NOME\", \"CLASS_DIAGRAM.COMMENTO\" FROM \"CLASS_DIAGRAM\" ON \"CLASS_DIAGRAM.NOME\" = ?";
+    private static final String READ_ALL_BY_NAME = "SELECT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM \"CLASS_DIAGRAM\" WHERE \"CLASS_DIAGRAM\".\"NOME\" = ?";
+    private static final String READ_ALL_NOT_IN_PACKAGE = "SELECT DISTINCT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM (\"CLASS_DIAGRAM\" INNER JOIN \"CD_DI_RIFERIMENTO\" ON  \"CD_DI_RIFERIMENTO\".\"ID_PACKAGE\" <> ?)";
 
     public ClassDiagramDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
@@ -33,6 +34,32 @@ public class ClassDiagramDAO  {
         preparedStatement.setInt(1,pkg.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
+
+        while(result.next()){
+            c = new ClassDiagram(result.getInt(1), result.getString(2), result.getString(3));
+            classdiagrams.add(c);
+        }
+        if(result != null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return classdiagrams;
+    }
+
+
+    public List<ClassDiagram> readAllNotInPackage(Package p) throws SQLException {
+        List<ClassDiagram> classdiagrams = new ArrayList<>();
+        ClassDiagram c;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_NOT_IN_PACKAGE);
+        preparedStatement.setInt(1,p.getId());
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+
         while(result.next()){
             c = new ClassDiagram(result.getInt(1), result.getString(2), result.getString(3));
             classdiagrams.add(c);

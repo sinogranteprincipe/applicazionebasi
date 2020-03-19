@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class MyOracleConnection {
     private static MyOracleConnection instance;
     private Connection connection;
-    private String url ="jdbc:oracle:thin:@LAPTOP-KDJK5080:1521:XE";
+    private String url ="jdbc:oracle:thin:@localhost:1521:XE";
     private String username ="sino";
     private String password = "progetto";
 

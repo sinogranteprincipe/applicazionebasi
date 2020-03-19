@@ -92,9 +92,18 @@ public class NuovoPackagePage {
                              p = new Package(-1, packageName.getText(), null);
                         }
                         pDAO.createPackage(p);
+                        FrameSetter.getjFrame().setContentPane(new VisualizzaPackagesPage().getView());
                     }catch (SQLException e){
                         areThereExceptions = true;
-
+                        int errorCode = e.getErrorCode();
+                        switch(errorCode) {
+                            case 1:
+                                errMessageForComment.setText("<html>Il nome selezionato è già presente <br>nel package selezionato.<br>Inserisci un altro nome.</html>\n");
+                                errMessageForComment.setVisible(true);
+                                errMessageWrapperForComment.setVisible(true);
+                            default:
+                                System.out.println(e.getErrorCode());
+                        }
                         e.printStackTrace();
                     }
             }

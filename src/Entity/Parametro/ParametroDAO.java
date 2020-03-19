@@ -17,6 +17,8 @@ public class ParametroDAO {
     Connection sharedDatabase;
 
     private static final String READ_ALL_IN_METHOD ="SELECT \"ID_PARAMETRO\", \"NOME\", \"ID_TIPO\", \"ID_METODO\", \"POSIZIONE\" FROM \"PARAMETRO\" WHERE \"ID_METODO\" = ?";
+    private static final String CREATE_PARAMETER = "INSERT INTO \"PARAMETRO\"(\"NOME\", \"ID_TIPO\", \"ID_METODO\", \"POSIZIONE\")VALUES(?,?,?,?)";
+
 
     public ParametroDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
@@ -52,7 +54,7 @@ public class ParametroDAO {
         ResultSet result = null;
 
         preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_METHOD);
-        preparedStatement.setInt(1, c.getId());
+        preparedStatement.setInt(1, m.getId());
         preparedStatement.execute();
         result = preparedStatement.getResultSet();
 
