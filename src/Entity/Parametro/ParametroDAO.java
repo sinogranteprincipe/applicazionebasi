@@ -1,8 +1,11 @@
 package Entity.Parametro;
 
+import Entity.Attributo.Attributo;
+import Entity.Classe.Classe;
 import Entity.Metodo.Metodo;
 import Entity.MyOracleConnection;
 import Entity.Package.Package;
+import Entity.TipoDiVisibilita;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,5 +43,39 @@ public class ParametroDAO {
             preparedStatement.close();
         }
         return parameters;
+    }
+
+    public List<Parametro> getAllParametersInMethod(Metodo m) throws SQLException {
+        List<Parametro> parameters = new ArrayList<>();
+        Parametro  p;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_METHOD);
+        preparedStatement.setInt(1, c.getId());
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+
+        while(result.next()){
+            p = new Parametro(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getInt(5));
+            parameters.add(p);
+        }
+        if(result!=null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return parameters;
+    }
+
+    public boolean createParameter(Parametro p) throws SQLException{
+        PreparedStatement preparedStatement = null;
+        preparedStatement = sharedDatabase.prepareStatement(CREATE_PARAMETER);
+        preparedStatement.setString(1, p.getNome());
+        preparedStatement.setInt(2,p.getIdTipo());
+        preparedStatement.setInt(3,p.getPosizione());
+        preparedStatement.setInt(4,p.getIdMetodo());
+        return preparedStatement.execute();
     }
 }

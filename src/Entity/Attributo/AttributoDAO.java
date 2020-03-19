@@ -2,6 +2,7 @@ package Entity.Attributo;
 
 import Entity.Associazione.Associazione;
 import Entity.Classe.Classe;
+import Entity.Metodo.Metodo;
 import Entity.MyOracleConnection;
 import Entity.TipoDiAssociazione;
 import Entity.TipoDiVisibilita;
@@ -58,4 +59,29 @@ public class AttributoDAO {
         preparedStatement.setInt(8,a.getPosizione());
         return preparedStatement.execute();
     }
+
+    public List<Attributo> readAllInClasse(Classe c) throws SQLException{
+        List<Attributo> attributes = new ArrayList<>();
+        Attributo a;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASSE);
+        preparedStatement.setInt(1, c.getId());
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+
+        while(result.next()){
+            a = new Attributo(result.getInt(1), result.getString(2), result.getInt(3), TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(4)), result.getString(5), result.getString(6), result.getString(7), result.getInt(8), result.getInt(9));
+            attributes.add(a);
+        }
+        if(result!=null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return attributes;
+    }
 }
+

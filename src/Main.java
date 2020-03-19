@@ -20,7 +20,7 @@ public class Main {
         MenuBarBuilder menuBarBuilder = new MenuBarBuilder();
         JMenuBar mb = MenuBarBuilder.getMenuBar();
         menuBarBuilder.setHomePageMenuBar();
-        f.getContentPane().add(new JLabel("Benvenuto!\nL'applicazione consente la gestione di un database per la memorizzazione di class diagram.\n"));
+        f.getContentPane().add(new JLabel("<html>Benvenuto!<br/>L'applicazione consente la gestione di un database per la memorizzazione di class diagram.</html>", SwingConstants.CENTER));
         f.setJMenuBar(mb);
         f.setVisible(true);
     }
