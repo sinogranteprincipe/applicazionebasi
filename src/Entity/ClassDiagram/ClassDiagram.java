@@ -38,10 +38,6 @@ public class ClassDiagram {
 
     @Override
     public String toString() {
-        return "ClassDiagram{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", commento='" + commento + '\'' +
-                '}';
+        return nome;
     }
 }

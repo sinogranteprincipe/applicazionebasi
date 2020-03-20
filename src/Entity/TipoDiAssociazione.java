@@ -6,6 +6,9 @@ public enum TipoDiAssociazione {
     DIRETTA, BIDIREZIONALE, COMPOSIZIONE, AGGREGAZIONE, MISSING;
 
     public static TipoDiAssociazione getTipoDiAssociazioneByName(String aType){
+        if(aType == null){
+            return TipoDiAssociazione.MISSING;
+        }
         switch (aType){
             case "DIRETTA":
                 return TipoDiAssociazione.DIRETTA;

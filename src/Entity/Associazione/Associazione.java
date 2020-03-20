@@ -93,15 +93,6 @@ public class Associazione {
 
     @Override
     public String toString() {
-        return "Associazione{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", raffigura=" + raffigura +
-                ", numeroMembri=" + numeroMembri +
-                ", visibilita=" + visibilita +
-                ", commento='" + commento + '\'' +
-                ", idClasseDiAssociazione=" + idClasseDiAssociazione +
-                ", idClassDiagram=" + idClassDiagram +
-                '}';
+        return nome;
     }
 }

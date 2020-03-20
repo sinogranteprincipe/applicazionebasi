@@ -13,7 +13,8 @@ import java.util.List;
 public class AssociazioneDAO {
     Connection sharedDatabase;
 
-    private static final String READ_ALL_IN_CLASS_DIAGRAM = "SELECT \"ID_ASSOCIAZIONE\", \"NOME\",\"RAFFIGURA\", \"NUMERO_MEMBRI\", \"VISIBILITA\", \"COMMENTO\", \"ID_CLASSE_DI_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\" FROM \"ASSOCIAZIONE\" WHERE \"ID_CLASS_DIAGRAM\"=?";
+    private static final String READ_BY_ID= "SELECT \"ID_ASSOCIAZIONE\", \"NOME\",\"RAFFIGURA\", \"NUMERO_MEMBRI\", \"VISIBILITA\", \"COMMENTO\", \"ID_CLASSE_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\" FROM \"ASSOCIAZIONE\" WHERE \"ID_ASSOCIAZIONE\"=?";
+    private static final String READ_ALL_IN_CLASS_DIAGRAM = "SELECT \"ID_ASSOCIAZIONE\", \"NOME\",\"RAFFIGURA\", \"NUMERO_MEMBRI\", \"VISIBILITA\", \"COMMENTO\", \"ID_CLASSE_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\" FROM \"ASSOCIAZIONE\" WHERE \"ID_CLASS_DIAGRAM\"=?";
     private static final String CREATE_ASSOCIAZIONE ="INSERT INTO \"ASSOCIAZIONE\"(\"NOME\",\"RAFFIGURA\",\"NUMERO_MEMBRI\",\"VISIBILITA\",\"COMMENTO\",\"ID_CLASSE_ASSOCIAZIONE\", \"ID_CLASS_DIAGRAM\")VALUES(?,?,?,?,?,?,?)";
     public AssociazioneDAO() throws SQLException{
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
@@ -42,6 +43,30 @@ public class AssociazioneDAO {
         }
         return associazioni;
     }
+
+
+    public Associazione readById(int anId) throws SQLException {
+        Associazione a;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_BY_ID);
+        preparedStatement.setInt(1, anId);
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+
+        result.next();
+        a = new Associazione(result.getInt(1), result.getString(2), TipoDiAssociazione.getTipoDiAssociazioneByName(result.getString(3)), result.getInt(4), TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(5)),result.getString(6), result.getInt(7), result.getInt(8));
+
+        if(result!=null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return a;
+    }
+
 
     public boolean createAssociazione(Associazione a) throws SQLException {
         PreparedStatement preparedStatement = null;

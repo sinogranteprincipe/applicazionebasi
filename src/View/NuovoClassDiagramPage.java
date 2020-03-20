@@ -9,8 +9,11 @@ import Entity.Package.PackageDAO;
 import View.Components.ColorPicker;
 import View.Components.FrameSetter;
 
+import javax.print.attribute.standard.JobName;
 import javax.swing.*;
+import java.security.PrivilegedAction;
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,8 +39,11 @@ public class NuovoClassDiagramPage {
     private JScrollPane commentContainer;
     private JPanel errMessageWrapperForMissingPackages;
     private JLabel errMessageForMissingPackages;
+    private JLabel errMessageForExistingDiagrams;
+    private JPanel errMessageForExistingDiagramsWrapper;
     private JCheckBox addExistingDiagram;
     private JComboBox<String> existingDiagrams;
+    private JButton aggiungiAPackage;
 
 
     private boolean areThereExceptions = false;
@@ -158,12 +164,16 @@ public class NuovoClassDiagramPage {
                         Package p = pDao.readPackageByName((String) packageJList.getSelectedItem() );
                         //aggiungo il collegamento tra package e class diagram
                         riferimentoDAO.addClassDiagramToPackage(new ClassDiagramRiferimento(p.getId(),idCD));
+
+                        FrameSetter.getjFrame().setContentPane(new ModificaClassDiagramPage(cd.getNome(), p.getNome()).getView());
+                        FrameSetter.getjFrame().validate();
                     }else{
                         //se non è in quello standard lo metto nel default
                         riferimentoDAO.addClassDiagramToPackage(new ClassDiagramRiferimento(0,idCD));
+
+                        FrameSetter.getjFrame().setContentPane(new ModificaClassDiagramPage(cd.getNome(),"Default" ).getView());
+                        FrameSetter.getjFrame().validate();
                     }
-                    FrameSetter.getjFrame().setContentPane(new ModificaClassDiagramPage().getView());
-                    FrameSetter.getjFrame().validate();
                 }catch(SQLException e){
                     areThereExceptions = true;
                     //gestisco le eccezioni
@@ -182,19 +192,48 @@ public class NuovoClassDiagramPage {
 
         public void populateDiagramsList(JComboBox j) {
             try {
+
+                boolean check = true;
+                int count = 0;
+
                 ClassDiagramDAO classDiagramDAO = new ClassDiagramDAO();
                 PackageDAO packageDAO = new PackageDAO();
-                Package p = packageDAO.readPackageByName((String) packageJList.getSelectedItem());
-                Package isInThis;
                 ClassDiagramRiferimentoDAO classDiagramRiferimentoDAO = new ClassDiagramRiferimentoDAO();
+
+                Package packageToInsertInto = packageDAO.readPackageByName((String) packageJList.getSelectedItem());
+                List<Package> packagesWhereItAlreadyIs = new ArrayList<>();
                 List<ClassDiagramRiferimento> classDiagramRiferimentoList;
-                List<ClassDiagram> diagrams = classDiagramDAO.readAllNotInPackage(p);
-                for(ClassDiagram cd : diagrams){
-                    classDiagramRiferimentoList = classDiagramRiferimentoDAO.readAllPackagesOfAClassDiagram(cd);
-                    for(ClassDiagramRiferimento rif: classDiagramRiferimentoList) {
-                        isInThis = packageDAO.readPackageById(rif.getIdPackage());
-                        j.addItem(cd.getNome() + " nel package " + isInThis.getNome());
+                List<ClassDiagram> diagrams = classDiagramDAO.readAllNotInPackage(packageToInsertInto);
+
+                if(diagrams.isEmpty()){
+                    errMessageForExistingDiagrams.setText("<html>Non esistono Class Diagram non <br> presenti nel package selezionato.<b");
+                    errMessageForExistingDiagrams.setVisible(true);
+                    errMessageForExistingDiagramsWrapper.setVisible(true);
+                }else{
+                    for(ClassDiagram cd : diagrams){
+                        classDiagramRiferimentoList = classDiagramRiferimentoDAO.readAllPackagesOfAClassDiagram(cd);
+                        for(ClassDiagramRiferimento rif: classDiagramRiferimentoList) {
+                            if(rif.getIdPackage() == packageToInsertInto.getId()){
+                                check = false;
+                            }else {
+                                packagesWhereItAlreadyIs.add(packageDAO.readPackageById(rif.getIdPackage()));
+                            }
+                        }
+                        if(check == true){
+                            count ++;
+                            for(Package toAdd : packagesWhereItAlreadyIs) {
+                                System.out.println(cd.getNome() + " nel package " + toAdd.getNome());
+                                j.addItem(cd.getNome() + " nel package " + toAdd.getNome());
+                            }
+                        }
+                        check = true;
                     }
+                    if(count == 0){
+                        errMessageForExistingDiagrams.setText("<html>Non esistono Class Diagram non <br> presenti nel package selezionato.<b");
+                        errMessageForExistingDiagrams.setVisible(true);
+                        errMessageForExistingDiagramsWrapper.setVisible(true);
+                    }
+                    FrameSetter.getjFrame().validate();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -206,28 +245,36 @@ public class NuovoClassDiagramPage {
             ClassDiagramDAO  classDiagramDAO;
             PackageDAO packageDAO;
             List<ClassDiagram> c;
-            Package p;
+            Package origin;
+            Package dest;
             ClassDiagramRiferimento cdrif;
             List<ClassDiagramRiferimento> listofreferences;
-            String selected = ((String) packageJList.getSelectedItem()).replaceAll(" nel package ","%");
-            System.out.println(selected);/*
+            String selected = ((String) existingDiagrams.getSelectedItem()).replaceAll(" nel package ","%");
             String classDiagramName = selected.substring(0,selected.indexOf("%"));
-            String packageName = selected.substring(selected.indexOf("%"), selected.length());
-            System.out.println(classDiagramName);
-            System.out.println(packageName);
-            /*
+            String packageName = selected.substring(selected.indexOf("%") + 1 , selected.length());
+
+
             try{
                 classDiagramDAO = new ClassDiagramDAO();
                 classDiagramRiferimentoDAO = new ClassDiagramRiferimentoDAO();
                 packageDAO = new PackageDAO();
-                p= packageDAO.readPackageByName((String)packageJList.getSelectedItem());
-                c = classDiagramDAO.readByName((String) existingDiagrams.getSelectedItem());
-                for(ClassDiagram i: c){
-
+                List<ClassDiagramRiferimento> riferimentoList;
+                origin= packageDAO.readPackageByName(packageName);
+                dest = packageDAO.readPackageByName((String) packageJList.getSelectedItem());
+                c = classDiagramDAO.readByName(classDiagramName);
+                for(ClassDiagram classDiagram: c){
+                    riferimentoList = classDiagramRiferimentoDAO.readAllPackagesOfAClassDiagram(classDiagram);
+                    for(ClassDiagramRiferimento rif: riferimentoList){
+                        if(origin.getId() == rif.getIdPackage()){
+                            classDiagramRiferimentoDAO.addClassDiagramToPackage(new ClassDiagramRiferimento(dest.getId(),classDiagram.getId()));
+                            break;
+                        }
+                    }
+                    break;
                 }
             }catch(SQLException e){
 
-            }*/
+            }
         }
     }
 
@@ -437,20 +484,24 @@ public class NuovoClassDiagramPage {
         errMessageForNome = new JLabel("");
         errMessageForComment = new JLabel("");
         errMessageForMissingPackages= new JLabel("");
+        errMessageForExistingDiagrams = new JLabel("");
+        errMessageForExistingDiagramsWrapper= new JPanel();
         existingDiagrams = new JComboBox<>();
+        aggiungiAPackage = new JButton("Aggiungi Diagramma");
 
         nameLabel =    new JLabel("   Inserisci il nome del Class Diagram:");
         commentLabel = new JLabel("Inserisci il commento al Class Diagram:");
 
+        aggiungiAPackage.setVisible(true);
+        aggiungiAPackage.setEnabled(false);
 
         packageJList.addItem(p);
 
+        existingDiagrams.addItem("");
 
         /*Imposta la dimensione della lista*/
         packageJList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         existingDiagrams.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-        existingDiagrams.addItem("");
 
         putInSpecificPackage.setHorizontalTextPosition(SwingConstants.LEFT);
         addExistingDiagram.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -460,7 +511,7 @@ public class NuovoClassDiagramPage {
 
         putInSpecificPackage.setEnabled(false);
         putInSpecificPackage.setSelected(true);
-
+        existingDiagrams.setEnabled(false);
         //metodo i messaggi d'errore invisibili con sfondo rosso
         errMessageWrapperForNome.setVisible(false);
         errMessageWrapperForNome.setBackground(ColorPicker.getColor("red"));
@@ -468,7 +519,11 @@ public class NuovoClassDiagramPage {
         errMessageWrapperForComment.setBackground(ColorPicker.getColor("red"));
         errMessageWrapperForMissingPackages.setVisible(false);
         errMessageWrapperForMissingPackages.setBackground(ColorPicker.getColor("red"));
+        errMessageForExistingDiagrams.setVisible(false);
+        errMessageForExistingDiagramsWrapper.setVisible(false);
+        errMessageForExistingDiagramsWrapper.setBackground(ColorPicker.getColor("red"));
 
+        errMessageForExistingDiagramsWrapper.add(errMessageForExistingDiagrams);
         errMessageWrapperForMissingPackages.add(errMessageForMissingPackages);
         errMessageWrapperForComment.add(errMessageForComment);
         errMessageWrapperForNome.add(errMessageForNome);
@@ -481,6 +536,7 @@ public class NuovoClassDiagramPage {
         classDiagramComment.setLineWrap(true);
         classDiagramComment.setWrapStyleWord(true);
         classDiagramComment.setAutoscrolls(true);
+
 
         /*L'area del commento sta dentro uno scroll pane, cioè con la barra, questo perché senno aggiungeva una linea sotto ogni
          * volta che uno superava il limite inferiore*/
@@ -523,10 +579,20 @@ public class NuovoClassDiagramPage {
                 if(addExistingDiagram.isSelected()) {
                     classDiagramName.setEnabled(false);
                     classDiagramComment.setEnabled(false);
+                    add.setEnabled(false);
+                    aggiungiAPackage.setEnabled(true);
                     controller.populateDiagramsList(existingDiagrams);
+                    existingDiagrams.setEnabled(true);
                     FrameSetter.getjFrame().validate();
 
                 }else{
+                    if(errMessageForExistingDiagrams.isVisible()){
+                        errMessageForExistingDiagrams.setVisible(false);
+                        errMessageForExistingDiagramsWrapper.setVisible(false);
+                    }
+                    add.setEnabled(true);
+                    existingDiagrams.setEnabled(false);
+                    aggiungiAPackage.setEnabled(false);
                     classDiagramName.setEnabled(true);
                     classDiagramComment.setEnabled(true);
                 }
@@ -536,11 +602,8 @@ public class NuovoClassDiagramPage {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(addExistingDiagram.isSelected()) {
-                    controller.addSelectedDiagramToPackage();
-                }else{
-                    controller.addClassDiagramButtonPressed();
-                }
+                controller.addClassDiagramButtonPressed();
+
                 if(!areThereExceptions && !areThereErrors){
                     JDialog parent = (JDialog) SwingUtilities.getWindowAncestor(view);
                     parent.dispose();
@@ -549,10 +612,23 @@ public class NuovoClassDiagramPage {
 
         });
 
+        aggiungiAPackage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(addExistingDiagram.isSelected()){
+                    if(!errMessageForExistingDiagramsWrapper.isVisible() || (((String) existingDiagrams.getSelectedItem()).compareTo("")==0)) {
+                        controller.addSelectedDiagramToPackage();
+                    }else{
+                        errMessageForExistingDiagrams.setText("Non hai selezionato un Class Diagram");
+                    }
+                }
+            }
+        });
 
         //aggiungo tutti gli elementi al pane principale
         view.add(addExistingDiagram);
         view.add(existingDiagrams);
+        view.add(errMessageForExistingDiagramsWrapper);
         view.add(nameLabel);
         view.add(classDiagramName);
         view.add(errMessageWrapperForNome);
@@ -563,7 +639,7 @@ public class NuovoClassDiagramPage {
         view.add(putInSpecificPackage);
         view.add(packageJList);
         view.add(add);
-
+        view.add(aggiungiAPackage);
 
         //setto il layout a quello che ho creato e a cui ho messo i constraint
 

@@ -4,25 +4,21 @@ import Entity.Package.Package;
 import Entity.Package.PackageDAO;
 import View.Components.FrameSetter;
 import View.Components.IconMaker;
+import com.formdev.flatlaf.ui.FlatTableCellBorder;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
+import javafx.scene.control.TableCell;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
+import javax.swing.table.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -65,7 +61,8 @@ public class VisualizzaPackagesPage {
 
         public void modifyTableLook() {
             TableColumn column;
-            int i = 0;
+            DefaultTableCellRenderer tableCellRenderer;
+            int i = 0, j = 0;
             for(i = 0;i <table.getColumnCount(); i++){
                 column = table.getColumnModel().getColumn(i);
                 column.setResizable(false);
@@ -93,6 +90,8 @@ public class VisualizzaPackagesPage {
         addDiagram = new JButton("Aggiungi Class Diagram");
         addPackage = new JButton("Aggiungi Package");
 
+        SpringLayout layout = new SpringLayout();
+
         buttonContainer.add(addDiagram);
         buttonContainer.add(addPackage);
 
@@ -103,13 +102,14 @@ public class VisualizzaPackagesPage {
         addDiagram.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JDialog addDiagramDialog = new JDialog();
+                JDialog addDiagramDialog = new JDialog(FrameSetter.getjFrame(), Dialog.ModalityType.APPLICATION_MODAL);
                 int row = table.getSelectedRow();
                 String p =(String) table.getValueAt(row, 0);
                 addDiagramDialog.setContentPane(new NuovoClassDiagramPage(p).getView());
                 addDiagramDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
                 addDiagramDialog.setResizable(false);
+                addDiagramDialog.setAlwaysOnTop(true);
                 addDiagramDialog.setLocation((int) (dim.width/2.5),dim.height/7);
                 addDiagramDialog.setSize(FrameSetter.getjFrame().getWidth()/3, FrameSetter.getjFrame().getHeight());
                 addDiagramDialog.setVisible(true);
@@ -126,7 +126,19 @@ public class VisualizzaPackagesPage {
 
         controller.populateTable(dataModel);
 
-        table = new JTable(dataModel);
+        table = new JTable(dataModel){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+                if (c instanceof JComponent) {
+                        JComponent jc = (JComponent) c;
+                        jc.setToolTipText("<html><p width=\"500\">" +getValueAt(row, column).toString()+"</p></html>");
+                }
+                return c;
+            }
+        };
+
+
 
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -143,12 +155,13 @@ public class VisualizzaPackagesPage {
         addPackage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JDialog addDiagramDialog = new JDialog();
+                JDialog addDiagramDialog = new JDialog(FrameSetter.getjFrame(), Dialog.ModalityType.APPLICATION_MODAL);
                 int row = table.getSelectedRow();
                 addDiagramDialog.setContentPane(new NuovoPackagePage("popup").getView());
                 addDiagramDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
                 addDiagramDialog.setResizable(false);
+                addDiagramDialog.setAlwaysOnTop(true);
                 addDiagramDialog.setLocation((int) (dim.width/2.5),dim.height/7);
                 addDiagramDialog.setSize(FrameSetter.getjFrame().getWidth()/3, FrameSetter.getjFrame().getHeight());
                 addDiagramDialog.addWindowListener(new WindowListener() {
@@ -200,8 +213,16 @@ public class VisualizzaPackagesPage {
                 addDiagramDialog.setVisible(true);
             }
         });
+
+        layout.putConstraint(SpringLayout.NORTH, tableContainer, 10, SpringLayout.NORTH, view);
+        layout.putConstraint(SpringLayout.NORTH, buttonContainer, 10, SpringLayout.SOUTH, tableContainer);
+        layout.putConstraint(SpringLayout.WEST, tableContainer, FrameSetter.getjFrame().getWidth()/4,SpringLayout.WEST ,view);
+        layout.putConstraint(SpringLayout.WEST, buttonContainer,FrameSetter.getjFrame().getWidth()/13, SpringLayout.WEST, tableContainer);
+
         view.add(tableContainer);
         view.add(buttonContainer);
+
+        view.setLayout(layout);
 
         view.setVisible(true);
 

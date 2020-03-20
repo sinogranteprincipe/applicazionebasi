@@ -31,15 +31,15 @@ public class ClasseDAO {
         PreparedStatement preparedStatement = null; //questa qua è la classe che contiene la query da lanciare
         ResultSet result = null; //il risultato della query
 
-        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASS_DIAGRAM); //il metodo prepareStament della Connection imposta la query su quel database, nel nostro caso READ_ALL_IN_CLASS_DIAGRAM
-        preparedStatement.setInt(1, cd.getId()); //imposto il 1° valore, cioè il primo interrogativo come un intero che ha il valore dell'id del classdiagram
-        preparedStatement.execute(); //lancio la query
-        result = preparedStatement.getResultSet(); // e mi prendo il risultato
-        while(result.next()){ //fin quando ho un qualcosa nel risultato
-            //creo una nuova classe con i valori delle colonne. Cosa importante dato che le enumerazioni sono stringhe sul db devi chiamarti il metodo statico dell'enumerazione
-            //ad esempio per visibilità usi il metodo statico getTipoDiVisibilità(String iltipodivisibilità)
-            c = new Classe(result.getInt(1), result.getString(2), TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(3)), result.getString(4), RuoloAssociazione.getRuoloAssociazioneByName(result.getString(5)), result.getInt(6), result.getInt(7), result.getInt(8), TipoDiClasse.getTipoDiClasseByName(result.getString(9)));
-            //aggiungo la classe alla lista di classi
+        preparedStatement = sharedDatabase.prepareStatement(READ_ALL_IN_CLASS_DIAGRAM);
+        preparedStatement.setInt(1, cd.getId());
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+        while(result.next()){
+            TipoDiVisibilita vis = TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(3));
+            RuoloAssociazione role = RuoloAssociazione.getRuoloAssociazioneByName(result.getString(5));
+            TipoDiClasse tipoDiClasse = TipoDiClasse.getTipoDiClasseByName(result.getString(9));
+            c = new Classe(result.getInt(1), result.getString(2),vis , result.getString(4), role , result.getInt(6), result.getInt(7), result.getInt(8), tipoDiClasse );
             classes.add(c);
         }
         //chiudo il risultato
@@ -70,7 +70,8 @@ public class ClasseDAO {
         }else {
             preparedStatement.setNull(5, Types.INTEGER);
         }
-        preparedStatement.setString(6,c.getTipoClasse().name());
+        preparedStatement.setInt(6, c.getIdClassDiagram());
+        preparedStatement.setString(7,c.getTipoClasse().name());
         return preparedStatement.execute();
     }
 

@@ -6,6 +6,9 @@ public enum TipoDiClasse {
     STANDARD, DATATYPE, PRIMITIVETYPE, ENUMERATION, INTERFACE, MISSING;
 
     public static TipoDiClasse getTipoDiClasseByName(String aClassType){
+        if(aClassType == null){
+            return  TipoDiClasse.MISSING;
+        }
         switch (aClassType){
             case "STANDARD":
                 return TipoDiClasse.STANDARD;

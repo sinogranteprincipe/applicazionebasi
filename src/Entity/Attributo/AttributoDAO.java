@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class AttributoDAO {
     Connection sharedDatabase;
 
-    private static final String READ_ALL_IN_CLASSE ="SELECT  FROM \"ATTRIBUTO\" WHERE \"ID_CLASSE=?\"";
+    private static final String READ_ALL_IN_CLASSE ="SELECT \"NOME\", \"ID_TIPO\", \"VISIBILITA\",\"RANGE_VALORI\", \"VALORE_DEFAULT\", \"STEREOTIPO\",\"ID_CLASSE\",\"POSIZIONE\"  FROM \"ATTRIBUTO\" WHERE \"ID_CLASSE\" = ? ";
     private static final String CREATE_ATTRIBUTE = "INSERT INTO \"ATTRIBUTO\"(\"NOME\", \"ID_TIPO\", \"VISIBILITA\",\"RANGE_VALORI\", \"VALORE_DEFAULT\", \"STEREOTIPO\",\"ID_CLASSE\",\"POSIZIONE\")VALUES(?,?,?,?,?,?,?,?)";
 
     public AttributoDAO() throws SQLException {

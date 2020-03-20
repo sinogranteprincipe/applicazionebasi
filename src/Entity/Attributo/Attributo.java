@@ -99,16 +99,6 @@ public class Attributo {
 
     @Override
     public String toString() {
-        return "Attributo{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", idTipo=" + idTipo +
-                ", visibilita=" + visibilita +
-                ", valoreDefault='" + valoreDefault + '\'' +
-                ", stereotipo='" + stereotipo + '\'' +
-                ", range='" + range + '\'' +
-                ", posizione=" + posizione +
-                ", idClasse=" + idClasse +
-                '}';
+        return nome;
     }
 }

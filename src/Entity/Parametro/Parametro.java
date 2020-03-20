@@ -49,13 +49,7 @@ public class Parametro {
 
     @Override
     public String toString() {
-        return "Parametro{" +
-                "idParametro=" + idParametro +
-                ", nome='" + nome + '\'' +
-                ", idTipo=" + idTipo +
-                ", idMetodo=" + idMetodo +
-                ", posizione=" + posizione +
-                '}';
+        return nome;
     }
 
     public Parametro(int idParametro, String nome, int idTipo, int idMetodo, int posizione) {

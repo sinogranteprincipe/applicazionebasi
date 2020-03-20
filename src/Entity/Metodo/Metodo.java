@@ -80,14 +80,6 @@ public class Metodo {
 
     @Override
     public String toString() {
-        return "Metodo{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", haParametri=" + haParametri +
-                ", idTipoDiRitorno=" + idTipoDiRitorno +
-                ", visibilita=" + visibilita +
-                ", idClasse=" + idClasse +
-                ", posizione=" + posizione +
-                '}';
+        return nome;
     }
 }

@@ -7,14 +7,10 @@ import java.awt.*;
 
 public class SideMenu {
 
-    private class SideMenuController{
-
-    }
-
     private JPanel view;
     private JScrollPane classDiagramContainer;
-    private JTree classDiagram;
-    private JPanel buttonContainer;
+    private JPanel buttonContainerAssociazione;
+    private JPanel buttonContainerClasse;
     private JLabel associationLabel;
     private JLabel classLabel;
     private JButton addAssociation;
@@ -22,48 +18,64 @@ public class SideMenu {
     private JButton modifyClasse;
     private JButton modifyAssociazione;
 
+    public JPanel getButtonContainerAssociazione() {
+        return buttonContainerAssociazione;
+    }
+
+    public JPanel getButtonContainerClasse() {
+        return buttonContainerClasse;
+    }
+
+    public JLabel getAssociationLabel() {
+        return associationLabel;
+    }
+
+    public JLabel getClassLabel() {
+        return classLabel;
+    }
+
+    public JButton getAddAssociation() {
+        return addAssociation;
+    }
+
+    public JButton getModifyClasse() {
+        return modifyClasse;
+    }
+
+    public JButton getModifyAssociazione() {
+        return modifyAssociazione;
+    }
+
     public JPanel getView() {
         return view;
     }
 
-    public SideMenu(){
+    public JButton getAddClasse() {
+        return addClasse;
+    }
 
-        SpringLayout layout = new SpringLayout();
+    public JScrollPane getClassDiagramContainer() {
+        return classDiagramContainer;
+    }
+
+    public SideMenu(){
         view = new JPanel();
         classDiagramContainer = new JScrollPane();
-        classDiagram = new JTree(new JTree.DynamicUtilTreeNode("wirvboin ", null));
-        buttonContainer = new JPanel();
+        buttonContainerAssociazione = new JPanel();
+        buttonContainerClasse = new JPanel();
         addAssociation = new JButton(IconMaker.getAddIcon());
         modifyAssociazione = new JButton(IconMaker.getEditIcon());
         associationLabel = new JLabel("Associazione:");
-        classLabel = new JLabel("Classe");
+        classLabel =       new JLabel("           Classe:");
         addClasse = new JButton(IconMaker.getAddIcon());
         modifyClasse = new JButton(IconMaker.getEditIcon());
-
-        classDiagramContainer.setSize(10, 10);
-        buttonContainer.setSize(FrameSetter.getjFrame().getWidth()/4, FrameSetter.getjFrame().getHeight()/3);
-/*
-        layout.putConstraint(SpringLayout.NORTH,classDiagramContainer, 5, SpringLayout.SOUTH, view);
-        layout.putConstraint(SpringLayout.NORTH, buttonContainer, 5, SpringLayout.SOUTH, classDiagramContainer);
-        layout.putConstraint(SpringLayout.WEST, classLabel, 5, SpringLayout.WEST, buttonContainer);
-
-        layout.putConstraint(SpringLayout.NORTH, classLabel, 5, SpringLayout.SOUTH, buttonContainer);
-        layout.putConstraint(SpringLayout.WEST, addClasse, 10, SpringLayout.EAST, classLabel);
-        layout.putConstraint(SpringLayout.WEST, modifyClasse, 10, SpringLayout.EAST, addClasse);
-
-        layout.putConstraint(SpringLayout.NORTH, addClasse, 0, SpringLayout.NORTH, classLabel);
-        layout.putConstraint(SpringLayout.NORTH, modifyClasse, 0, SpringLayout.NORTH, classLabel);
-
-        layout.putConstraint(SpringLayout.NORTH, associationLabel, 10, SpringLayout.NORTH, classLabel);
-        layout.putConstraint(SpringLayout.WEST, addAssociation, 10, SpringLayout.EAST, associationLabel);
-        layout.putConstraint(SpringLayout.WEST, modifyAssociazione, 10, SpringLayout.EAST, addAssociation);
-
-        layout.putConstraint(SpringLayout.NORTH, addAssociation, 0, SpringLayout.NORTH, associationLabel);
-        layout.putConstraint(SpringLayout.NORTH, modifyAssociazione, 0, SpringLayout.NORTH, associationLabel);
-*/
+        classDiagramContainer.setSize(FrameSetter.getjFrame().getWidth()/4, FrameSetter.getjFrame().getHeight()/3);
+        buttonContainerAssociazione.setSize(FrameSetter.getjFrame().getWidth()/4, FrameSetter.getjFrame().getHeight()/3);
+        buttonContainerClasse.setSize(FrameSetter.getjFrame().getWidth()/4, FrameSetter.getjFrame().getHeight()/3);
 
         view.setVisible(true);
-        buttonContainer.setVisible(true);
+        buttonContainerAssociazione.setVisible(true);
+        buttonContainerClasse.setVisible(true);
         addAssociation.setVisible(true);
         modifyAssociazione.setVisible(true);
         associationLabel.setVisible(true);
@@ -71,19 +83,17 @@ public class SideMenu {
         addClasse.setVisible(true);
         modifyClasse.setVisible(true);
         classDiagramContainer.setVisible(true);
-        classDiagram.setVisible(true);
 
-        classDiagramContainer.setViewportView(classDiagram);
+        buttonContainerAssociazione.add(associationLabel);
+        buttonContainerAssociazione.add(addAssociation);
+        buttonContainerAssociazione.add(modifyAssociazione);
+        buttonContainerClasse.add(classLabel);
+        buttonContainerClasse.add(addClasse);
+        buttonContainerClasse.add(modifyClasse);
 
-        buttonContainer.add(modifyAssociazione);
-        buttonContainer.add(associationLabel);
-        buttonContainer.add(addAssociation);
-        buttonContainer.add(classLabel);
-        buttonContainer.add(addClasse);
-        buttonContainer.add(modifyClasse);
-
-        view.add(classDiagramContainer);
-        view.add(buttonContainer);
-     //   view.setLayout(layout);
+        view.setLayout(new BoxLayout(view,BoxLayout.Y_AXIS));
+        view.add(classDiagramContainer, Component.CENTER_ALIGNMENT);
+        view.add(buttonContainerClasse, Component.LEFT_ALIGNMENT);
+        view.add(buttonContainerAssociazione, Component.LEFT_ALIGNMENT);
     }
 }

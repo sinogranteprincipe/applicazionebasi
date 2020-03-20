@@ -6,6 +6,9 @@ public enum RuoloAssociazione {
     SEMPLICE, EPDIRETTO, AGGREGATA, COMPOSTA, MISSING;
 
     public static RuoloAssociazione getRuoloAssociazioneByName(String aRole){
+        if(aRole == null){
+            return  RuoloAssociazione.MISSING;
+        }
         switch (aRole){
             case "SEMPLICE":
                 return RuoloAssociazione.SEMPLICE;

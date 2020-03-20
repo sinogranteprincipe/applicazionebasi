@@ -6,6 +6,9 @@ public enum TipoDiVisibilita {
     PUBLIC, PRIVATE, PROTECTED, PACKAGE, MISSING;
 
     public static TipoDiVisibilita getTipoDiVisibilitaByName(String aName){
+        if(aName==null){
+            return TipoDiVisibilita.MISSING;
+        }
         switch (aName){
             case "PUBLIC":
                 return TipoDiVisibilita.PUBLIC;

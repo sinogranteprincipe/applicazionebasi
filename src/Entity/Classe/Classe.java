@@ -92,6 +92,11 @@ public class Classe {
 
     @Override
     public String toString() {
+        return nome;
+    }
+
+
+    public String toString(int i) {
         return "Classe{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
@@ -128,5 +133,9 @@ public class Classe {
         this.idAssociazione = idAssociazione;
         this.idClassDiagram = idClassDiagram;
         this.tipoClasse = tipoClasse;
+    }
+
+    public Classe(){
+        return;
     }
 }

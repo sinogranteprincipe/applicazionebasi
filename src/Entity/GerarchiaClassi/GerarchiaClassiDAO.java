@@ -15,12 +15,12 @@ public class GerarchiaClassiDAO {
     Connection sharedDatabase;
 
     private static final String READ_ALL_FOR_CLASSE="SELECT \"ID_CLASSE_BASE\",\"ID_SUPERCLASSE\", \"ID_SOTTOCLASSE\" FROM \"GERARCHIA_CLASSI\"WHERE \"ID_CLASSE_BASE\" = ?";
-    private static final String ADD_GERARCHIA_CLASSI ="INSERT INTO \"GERARCHIA_CLASSi\"(\"ID_CLASSE_BASE\",\"ID_SOTTOCLASSE\",\"ID_SUPERCLASSE\")VALUES(?,?,?)";
+    private static final String ADD_GERARCHIA_CLASSI ="INSERT INTO \"GERARCHIA_CLASSI\"(\"ID_CLASSE_BASE\",\"ID_SUPERCLASSE\",\"ID_SOTTOCLASSE\")VALUES(?,?,?)";
 
     public GerarchiaClassiDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
     }
-    public List<GerarchiaClassi> readAllInCLassDIagram(Classe c) throws SQLException {
+    public List<GerarchiaClassi> readAllForClasse(Classe c) throws SQLException {
         List<GerarchiaClassi> classes = new ArrayList<>();
         GerarchiaClassi gc;
         PreparedStatement preparedStatement = null;
@@ -54,14 +54,17 @@ public class GerarchiaClassiDAO {
             throw new InvalidParameterException("ERRORE: una classe non può contemporaneamente estendere o essere estesa");
         }else{
             preparedStatement.setInt(1,classeBase.getId());
+
             if(superclasse==null){
-                preparedStatement.setNull(2, Types.NULL);
+                preparedStatement.setNull(2, Types.INTEGER);
             }else{
+                System.out.println(superclasse.getId());
                 preparedStatement.setInt(2, superclasse.getId());
             }
             if(sottoclasse==null){
-                preparedStatement.setNull(3, Types.NULL);
+                preparedStatement.setNull(3, Types.INTEGER);
             }else{
+                System.out.println(sottoclasse.getId());
                 preparedStatement.setInt(3, sottoclasse.getId());
             }
         }
