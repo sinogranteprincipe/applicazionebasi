@@ -2,7 +2,7 @@ package Entity.Attributo;
 
 import Entity.TipoDiVisibilita;
 
-public class Attributo {
+public class Attributo{
 
     private int id;
     private String nome;
@@ -97,8 +97,22 @@ public class Attributo {
         this.idClasse = idClasse;
     }
 
+    public Attributo(int id, String nome,int idTipo, TipoDiVisibilita visibilita, String minvalue, String maxvalue, String valoreDefault, String stereotipo, int idClasse, int posizione) {
+        this.id = id;
+        this.idTipo= idTipo;
+        this.nome = nome;
+        this.visibilita = visibilita;
+        this.valoreDefault = valoreDefault;
+        this.stereotipo = stereotipo;
+        this.range = "["+minvalue+"..."+maxvalue+"]";
+        this.posizione = posizione;
+        this.idClasse = idClasse;
+    }
+
     @Override
     public String toString() {
         return nome;
     }
+
+
 }

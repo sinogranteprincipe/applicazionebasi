@@ -44,7 +44,11 @@ public class ModificaClassDiagramPage {
     private JPanel currentPageView;
     private JPanel sideMenuView;
 
-
+    /*This is the listener for the tree in the side menu of the page. What it does is as follows:
+    * 1. Gets the click event;
+    * 2. On double click gets the clicked object;
+    * 3. Accordingly to the clicked object type shows the right view, either class or association;
+     */
     private class TreeListener extends MouseAdapter {
         private JTree tree;
         private boolean singleClick  = true;
@@ -99,6 +103,9 @@ public class ModificaClassDiagramPage {
                     Classe c = (Classe) o;
                     System.out.println("classe nome: " + c.getNome());
                     ClassViewPanel classViewPanel = new ClassViewPanel(c);
+                    ClassViewPanel.ClassViewPanelController classViewPanelController = classViewPanel.getController();
+                    JButton addAttributo = classViewPanel.getAggiungiAttributo();
+                    addAttributo.addActionListener(actionEvent -> classViewPanelController.addAttributoPressed(c));
                     if(currentPageView != null){
                         currentPageView.removeAll();
                     }

@@ -7,6 +7,7 @@ import Entity.TipoDiVisibilita;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MetodoDAO {
@@ -39,6 +40,17 @@ public class MetodoDAO {
         if(preparedStatement != null){
             preparedStatement.close();
         }
+        methods.sort(new Comparator<Metodo>() {
+            @Override
+            public int compare(Metodo metodo, Metodo t1) {
+                if(metodo.getPosizione()>t1.getPosizione()){
+                    return 1;
+                }else if(metodo.getPosizione()<t1.getPosizione()){
+                    return -1;
+                }
+                return 0;
+            }
+        });
         return methods;
     }
 

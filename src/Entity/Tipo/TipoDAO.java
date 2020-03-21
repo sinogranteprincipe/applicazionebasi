@@ -18,6 +18,7 @@ import java.util.List;
 public class TipoDAO{
     Connection sharedDatabase;
 
+    private static final String READ_BY_ID = "SELECT \"ID_TIPO\",\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\",\"E_PRIMITIVO\" FROM \"TIPO\" WHERE \"ID_TIPO\"=?";
     private static final String READ_ALL_IN_CLASS_DIAGRAM = "SELECT \"ID_TIPO\",\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\",\"E_PRIMITIVO\" FROM \"TIPO\" WHERE \"ID_CLASS_DIAGRAM\"=?";
     private static final String READ_ALL_PRIMITIVES = "SELECT \"ID_TIPO\",\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\",\"E_PRIMITIVO\" FROM \"TIPO\" WHERE \"E_PRIMITIVO\"=1";
     private static final String ADD_USER_DEFINED_PRIMITIVE_TYPE= "INSERT INTO TIPO(\"NOME\", \"RANGE_VALORI\", \"ID_CLASSE_DEFINENTE\", \"ID_CLASS_DIAGRAM\", \"DIMENSIONE_ARRAY\", \"E_ARRAY\", \"E_PRIMITIVO\") VALUES (?,?,?,?,?,?,?)";
@@ -96,5 +97,25 @@ public class TipoDAO{
             preparedStatement.setInt(7, 1);
         }
         return preparedStatement.execute();
+    }
+
+    public Tipo readTipoById(int anId) throws SQLException{
+        Tipo t;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_BY_ID);
+        preparedStatement.setInt(1, anId);
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+        result.next();
+        t = new Tipo(result.getInt(1), result.getString(2), result.getString(3), result.getInt(4),result.getInt(5), result.getInt(6),(result.getInt(7)==1),(result.getInt(8)==1));
+        if(result != null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return t;
     }
 }

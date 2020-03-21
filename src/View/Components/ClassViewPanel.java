@@ -2,16 +2,24 @@ package View.Components;
 
 import Entity.Associazione.Associazione;
 import Entity.Associazione.AssociazioneDAO;
+import Entity.Attributo.Attributo;
+import Entity.Attributo.AttributoDAO;
 import Entity.Classe.Classe;
 import Entity.Classe.ClasseDAO;
 import Entity.Partecipa.Partecipa;
 import Entity.Partecipa.PartecipaDAO;
+import Entity.Tipo.Tipo;
+import Entity.Tipo.TipoDAO;
+import View.NuovoPackagePage;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 public class ClassViewPanel {
-    private class ClassViewPanelController{
+    public class ClassViewPanelController{
 
         public void populateRappresentaList(String rappresenta) {
             AssociazioneDAO associazioneDAO;
@@ -52,6 +60,8 @@ public class ClassViewPanel {
                                 break;
                             }else{
                                 errMessage.setText("Impossibile trovare l'associazione per la composizione");
+                                errMessage.setVisible(true);
+                                errMessageWrapper.setVisible(true);
                             }
                         }
                         rappresentaExplainer.setVisible(true);
@@ -71,14 +81,64 @@ public class ClassViewPanel {
                 Associazione a;
                 for(Partecipa p: l){
                     a = associazioneDAO.readById(p.getIdAssociazione());
-                    associazioni.add(new JLabel(a.getNome()));
+                    associazioniWrapper.add(new JLabel(a.getNome()));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
+
+        public void populateAttributiList(Classe c) {
+            boolean areThereAttributes = false;
+            try {
+                List<Attributo> l;
+                AttributoDAO attributoDAO = new AttributoDAO();
+                l=attributoDAO.getAllAttributesInClass(c);
+                TipoDAO tipoDAO = new TipoDAO();
+                Tipo t;
+                if(l.isEmpty()){
+                   attributiWrapper.setVisible(false);
+                }else {
+                    for (Attributo a : l) {
+                        t = tipoDAO.readTipoById(a.getIdTipo());
+                        System.out.println(t.toString());
+                        System.out.println(a.toString());
+                        String label = a.getPosizione() + " :" + a.getVisibilita().name().toLowerCase()  +" " +t.getNome() + " " + a.getNome();
+                        attributiWrapper.add(new JLabel(label));
+                    }
+                    attributiLabel.setVisible(true);
+                    FrameSetter.getjFrame().revalidate();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                errMessage.setText("Impossibile connettersi al database");
+                errMessage.setVisible(true);
+                errMessageWrapper.setVisible(true);
+            }
+
+        }
+
+        public void addAttributoPressed(Classe c) {
+            JDialog addDiagramDialog = new JDialog(FrameSetter.getjFrame(), Dialog.ModalityType.APPLICATION_MODAL);
+            addDiagramDialog.setContentPane(new NuovoAttributoPanel(c).getView());
+            addDiagramDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            addDiagramDialog.setResizable(false);
+            addDiagramDialog.setAlwaysOnTop(true);
+            addDiagramDialog.setLocation((int) (dim.width/2.5),dim.height/7);
+            addDiagramDialog.setSize(FrameSetter.getjFrame().getWidth()/3, FrameSetter.getjFrame().getHeight());
+            System.out.println(addDiagramDialog.isVisible());
+            addDiagramDialog.setVisible(true);
+            addDiagramDialog.validate();
+        }
     }
 
+    public ClassViewPanelController getController() {
+        return controller;
+    }
+
+    private ClassViewPanelController controller;
     private Classe c;
     private JPanel view;
     private JLabel classeName;
@@ -90,16 +150,13 @@ public class ClassViewPanel {
     private JLabel attributiLabel;
     private JLabel metodiLabel;
     private JLabel associazioniLabel;
-    private JList<String> metodi;
-    private JList<String> attributi;
-    private JList<String> associazioni;
     private JLabel errMessage;
 
     private JPanel errMessageWrapper;
-    private JScrollPane associazioniWrapper;
+    private JPanel associazioniWrapper;
     private JPanel classdataWrapper;
-    private JScrollPane metodiWrapper;
-    private JScrollPane attributiWrapper;
+    private JPanel metodiWrapper;
+    private JPanel attributiWrapper;
     private JPanel buttonWrapper;
 
     private JButton aggiungiMetodo;
@@ -108,10 +165,10 @@ public class ClassViewPanel {
     private JButton rimuoviAttributo;
 
     public ClassViewPanel(Classe c){
-        System.out.println("Entro");
         this.c= c;
         view = new JPanel();
-        ClassViewPanelController controller = new ClassViewPanelController();
+
+        controller = new ClassViewPanelController();
         classeName = new JLabel("Nome Classe:  " + c.getNome());
         visibilita = new JLabel("Visibilità:   " + c.getVisibilita().name().toLowerCase());
         rappresenta = new JLabel("Rappresenta:  " + c.getRappresenta().name().toLowerCase());
@@ -119,23 +176,21 @@ public class ClassViewPanel {
         stereotipo = new JLabel("Stereotipo:  " + c.getStereotipo());
         rappresentaExplainer = new JLabel();
         associazioniLabel= new JLabel("Partecipa alle associazioni:");
-        associazioni = new JList<>();
-        associazioniWrapper = new JScrollPane();
+        associazioniWrapper = new JPanel();
 
         SpringLayout layout = new SpringLayout();
 
         attributiLabel = new JLabel("Attributi:");
         metodiLabel = new JLabel("Metodi:");
-        metodi = new JList<>();
-        attributi = new JList<>();
+
         aggiungiMetodo = new JButton("Aggiungi Metodo");
         aggiungiAttributo = new JButton("Aggiungi Attributo");
         rimuoviMetodo = new JButton("Rimuovi Metodo");
         rimuoviAttributo = new JButton("Rimuovi Attributo");
 
         classdataWrapper = new JPanel();
-        metodiWrapper = new JScrollPane();
-        attributiWrapper = new JScrollPane();
+        metodiWrapper = new JPanel();
+        attributiWrapper = new JPanel();
         buttonWrapper = new JPanel();
 
         classdataWrapper.add(classeName);
@@ -146,13 +201,10 @@ public class ClassViewPanel {
         classdataWrapper.add(tipoDiClasse);
 
         metodiWrapper.add(metodiLabel);
-        metodiWrapper.add(metodi);
 
         attributiWrapper.add(attributiLabel);
-        attributiWrapper.add(attributi);
 
         associazioniWrapper.add(associazioniLabel);
-        associazioniWrapper.add(associazioni);
 
         buttonWrapper.add(aggiungiMetodo);
         buttonWrapper.add(rimuoviMetodo);
@@ -165,180 +217,105 @@ public class ClassViewPanel {
         view.add(metodiWrapper);
         view.add(buttonWrapper);
 
-        if(rappresenta.getText()=="missing" || rappresenta.getText()==null){
+        if(rappresenta.getText().compareTo("missing")==0 || rappresenta.getText()==null){
             rappresenta.setVisible(false);
         }else{
             controller.populateRappresentaList(rappresenta.getText());
         }
 
         controller.populateAssociazioniList( c);
-
+        controller.populateAttributiList(c);
         classdataWrapper.setLayout(new BoxLayout(classdataWrapper, BoxLayout.Y_AXIS));
         view.setLayout(new BoxLayout(view, BoxLayout.Y_AXIS));
-
-
-        System.out.println("Esco");
-
     }
 
     public Classe getC() {
         return c;
     }
 
-    public void setC(Classe c) {
-        this.c = c;
-    }
 
     public JPanel getView() {
         return view;
     }
 
-    public void setView(JPanel view) {
-        this.view = view;
-    }
 
     public JLabel getClasseName() {
         return classeName;
     }
 
-    public void setClasseName(JLabel classeName) {
-        this.classeName = classeName;
-    }
 
     public JLabel getVisibilita() {
         return visibilita;
     }
 
-    public void setVisibilita(JLabel visibilita) {
-        this.visibilita = visibilita;
-    }
 
     public JLabel getRappresenta() {
         return rappresenta;
     }
 
-    public void setRappresenta(JLabel rappresenta) {
-        this.rappresenta = rappresenta;
-    }
 
     public JLabel getTipoDiClasse() {
         return tipoDiClasse;
     }
 
-    public void setTipoDiClasse(JLabel tipoDiClasse) {
-        this.tipoDiClasse = tipoDiClasse;
-    }
 
     public JLabel getStereotipo() {
         return stereotipo;
     }
 
-    public void setStereotipo(JLabel stereotipo) {
-        this.stereotipo = stereotipo;
-    }
 
     public JLabel getRappresentaExplainer() {
         return rappresentaExplainer;
     }
 
-    public void setRappresentaExplainer(JLabel rappresentaExplainer) {
-        this.rappresentaExplainer = rappresentaExplainer;
-    }
-
-
     public JLabel getAttributiLabel() {
         return attributiLabel;
     }
 
-    public void setAttributiLabel(JLabel attributiLabel) {
-        this.attributiLabel = attributiLabel;
-    }
 
     public JLabel getMetodiLabel() {
         return metodiLabel;
     }
 
-    public void setMetodiLabel(JLabel metodiLabel) {
-        this.metodiLabel = metodiLabel;
-    }
 
-    public JList<String> getMetodi() {
-        return metodi;
-    }
-
-    public void setMetodi(JList<String> metodi) {
-        this.metodi = metodi;
-    }
-
-    public JList<String> getAttributi() {
-        return attributi;
-    }
-
-    public void setAttributi(JList<String> attributi) {
-        this.attributi = attributi;
-    }
 
     public JPanel getClassdataWrapper() {
         return classdataWrapper;
     }
 
-    public void setClassdataWrapper(JPanel classdataWrapper) {
-        this.classdataWrapper = classdataWrapper;
-    }
 
-    public JScrollPane getMetodiWrapper() {
+    public JPanel getMetodiWrapper() {
         return metodiWrapper;
     }
 
-    public void setMetodiWrapper(JScrollPane metodiWrapper) {
-        this.metodiWrapper = metodiWrapper;
-    }
 
-    public JScrollPane getAttributiWrapper() {
+    public JPanel getAttributiWrapper() {
         return attributiWrapper;
     }
 
-    public void setAttributiWrapper(JScrollPane attributiWrapper) {
-        this.attributiWrapper = attributiWrapper;
-    }
 
     public JPanel getButtonWrapper() {
         return buttonWrapper;
     }
 
-    public void setButtonWrapper(JPanel buttonWrapper) {
-        this.buttonWrapper = buttonWrapper;
-    }
 
     public JButton getAggiungiMetodo() {
         return aggiungiMetodo;
     }
 
-    public void setAggiungiMetodo(JButton aggiungiMetodo) {
-        this.aggiungiMetodo = aggiungiMetodo;
-    }
 
     public JButton getAggiungiAttributo() {
         return aggiungiAttributo;
     }
 
-    public void setAggiungiAttributo(JButton aggiungiAttributo) {
-        this.aggiungiAttributo = aggiungiAttributo;
-    }
 
     public JButton getRimuoviMetodo() {
         return rimuoviMetodo;
     }
 
-    public void setRimuoviMetodo(JButton rimuoviMetodo) {
-        this.rimuoviMetodo = rimuoviMetodo;
-    }
 
     public JButton getRimuoviAttributo() {
         return rimuoviAttributo;
     }
 
-    public void setRimuoviAttributo(JButton rimuoviAttributo) {
-        this.rimuoviAttributo = rimuoviAttributo;
-    }
 }

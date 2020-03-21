@@ -19,6 +19,8 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -36,6 +38,7 @@ public class VisualizzaPackagesPage {
     JButton addDiagram;
     JButton addPackage;
     DefaultTableModel dataModel;
+    VisualizzaPackagesPageController controller;
 
     private class VisualizzaPackagesPageController{
 
@@ -73,6 +76,11 @@ public class VisualizzaPackagesPage {
                }
             }
         }
+
+        public void goToClickedDiagramPage(String packageName) {
+            FrameSetter.getjFrame().setContentPane(new VisualizzaClassDiagramPage(packageName).getView());
+            FrameSetter.getjFrame().getContentPane().revalidate();
+        }
     }
 
 
@@ -82,7 +90,7 @@ public class VisualizzaPackagesPage {
     }
 
     public VisualizzaPackagesPage(){
-        VisualizzaPackagesPageController controller = new VisualizzaPackagesPageController();
+        controller = new VisualizzaPackagesPageController();
 
         view = new JPanel();
         tableContainer = new JScrollPane();
@@ -138,16 +146,9 @@ public class VisualizzaPackagesPage {
             }
         };
 
+        table.getSelectionModel().addListSelectionListener(new MyListSelectionListener());
 
-
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(addDiagram.isEnabled() == false){
-                    addDiagram.setEnabled(true);
-                }
-            }
-        });
+        table.addMouseListener(new tableMouseListener());
 
         controller.modifyTableLook();
         tableContainer.setViewportView(table);
@@ -167,7 +168,9 @@ public class VisualizzaPackagesPage {
                 addDiagramDialog.addWindowListener(new WindowListener() {
                     @Override
                     public void windowOpened(WindowEvent windowEvent) {
-
+                        if(addDiagram.isEnabled()){
+                            addDiagram.setEnabled(false);
+                        }
                     }
 
                     @Override
@@ -183,9 +186,22 @@ public class VisualizzaPackagesPage {
                                 return false;
                             }
                         };
+
                         controller.populateTable(dataModel);
-                        table = new JTable(dataModel);
+                        table = new JTable(dataModel){
+                                @Override
+                                public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                                Component c = super.prepareRenderer(renderer, row, column);
+                                if (c instanceof JComponent) {
+                                    JComponent jc = (JComponent) c;
+                                    jc.setToolTipText("<html><p width=\"500\">" +getValueAt(row, column).toString()+"</p></html>");
+                                }
+                                return c;
+                                }
+                        };
                         controller.modifyTableLook();
+                        table.addMouseListener(new tableMouseListener());
+                        table.getSelectionModel().addListSelectionListener(new MyListSelectionListener());
                         tableContainer.setViewportView(table);
                         FrameSetter.getjFrame().validate();
                     }
@@ -228,4 +244,46 @@ public class VisualizzaPackagesPage {
 
     }
 
+    private class tableMouseListener implements MouseListener {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if(mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1){
+                    String packageName = (String) table.getValueAt(row, 0);
+                    controller.goToClickedDiagramPage(packageName);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        }
+
+    private class MyListSelectionListener implements ListSelectionListener {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if(addDiagram.isEnabled() == false){
+                    addDiagram.setEnabled(true);
+                }
+
+            }
+    }
 }

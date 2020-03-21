@@ -6,19 +6,14 @@ import java.sql.SQLException;
 
 public class MyOracleConnection {
     private static MyOracleConnection instance;
-    private Connection connection;
-    /*private String url ="jdbc:oracle:thin:@localhost:1521:XE";
-    private String username ="sino";
-    private String password = "progetto";
-    */
-    private String url ="jdbc:oracle:thin:@192.168.1.13:1521:XE";
-    private String username ="system";
-    private String password = "accro";
+    private static Connection connection;
+    private static String host;
+    private static String port;
+    private static String database;
+    private static String username;
+    private static String password;
+    private static String url;
 
-    private String host;
-    private String port;
-    private String database;
-    //private String url = "jdbc:oracle:thin:@"+host+":"+"port"+":"+database;
 
     private MyOracleConnection()throws SQLException{
         try{
@@ -34,26 +29,22 @@ public class MyOracleConnection {
         return connection;
     }
 
-/*
-    private MyOracleConnection(String hostTextField, String usernameTextField, String passwordTextField, String portaTextField, String databaseTextField)throws SQLException{
-        try{
+
+    public MyOracleConnection(String hostTextField, String usernameTextField, String passwordTextField, String portaTextField, String databaseTextField)throws SQLException{
+            host = hostTextField;
+            username = usernameTextField;
+            password = passwordTextField;
+            port = portaTextField;
+            database = databaseTextField;
+
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-            //this.connection = DriverManager.getConnection(hostTextField, usernameTextField, passwordTextField, portaTextField, databaseTextField);
-            //this.connection = DriverManager.getConnection(host username, password, port, database);
-        }catch(Exception ex){
-            System.out.println("Database Connection Creation Failed: " + ex.getMessage());
-        }
+            String tmp = "jdbc:oracle:thin:@"+host+":"+port+":"+database;
+            this.url = tmp;
+            System.out.println(tmp +"\n" +username + "\n" +password);
+            this.connection = DriverManager.getConnection(url, username, password );
+
     }
 
-    public Connection getConnection(String hostTextField, String usernameTextField, String passwordTextField, String portaTextField, String databaseTextField) {
-        this.username = usernameTextField;
-        this.password = passwordTextField;
-        this.host = hostTextField;
-        this.port = portaTextField;
-        this.database = databaseTextField;
-        return connection;
-    }
-*/
     public static MyOracleConnection getInstance() throws SQLException{
         if(instance == null){
             instance = new MyOracleConnection();

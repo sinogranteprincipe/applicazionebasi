@@ -9,13 +9,14 @@ import Entity.TipoDiVisibilita;
 import org.w3c.dom.Attr;
 
 import java.sql.*;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 
 public class AttributoDAO {
     Connection sharedDatabase;
 
-    private static final String READ_ALL_IN_CLASSE ="SELECT \"NOME\", \"ID_TIPO\", \"VISIBILITA\",\"RANGE_VALORI\", \"VALORE_DEFAULT\", \"STEREOTIPO\",\"ID_CLASSE\",\"POSIZIONE\"  FROM \"ATTRIBUTO\" WHERE \"ID_CLASSE\" = ? ";
+    private static final String READ_ALL_IN_CLASSE ="SELECT \"NOME\", \"ID_TIPO\", \"VISIBILITA\",\"RANGE_VALORI\", \"VALORE_DEFAULT\", \"STEREOTIPO\",\"ID_CLASSE\",\"POSIZIONE\",\"ID_ATTRIBUTO\"  FROM \"ATTRIBUTO\" WHERE \"ID_CLASSE\" = ? ";
     private static final String CREATE_ATTRIBUTE = "INSERT INTO \"ATTRIBUTO\"(\"NOME\", \"ID_TIPO\", \"VISIBILITA\",\"RANGE_VALORI\", \"VALORE_DEFAULT\", \"STEREOTIPO\",\"ID_CLASSE\",\"POSIZIONE\")VALUES(?,?,?,?,?,?,?,?)";
 
     public AttributoDAO() throws SQLException {
@@ -34,7 +35,7 @@ public class AttributoDAO {
         result = preparedStatement.getResultSet();
 
         while(result.next()){
-            a = new Attributo(result.getInt(1), result.getString(2), result.getInt(3), TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(4)), result.getString(5), result.getString(6), result.getString(7), result.getInt(8), result.getInt(9));
+            a = new Attributo(result.getInt(9),result.getString(1),result.getInt(2) ,Entity.TipoDiVisibilita.getTipoDiVisibilitaByName(result.getString(3)), result.getString(4), result.getString(5), result.getString(6), result.getInt(7), result.getInt(8));
             attributes.add(a);
         }
         if(result!=null){
@@ -43,6 +44,18 @@ public class AttributoDAO {
         if(preparedStatement != null){
             preparedStatement.close();
         }
+        attributes.sort(new Comparator<Attributo>() {
+            @Override
+            public int compare(Attributo attributo, Attributo t1) {
+                if(attributo.getPosizione()>t1.getPosizione()){
+                    return 1;
+                }else if(attributo.getPosizione()<t1.getPosizione()){
+                    return -1;
+                }else {
+                    return 0;
+                }
+            }
+        });
         return attributes;
     }
 

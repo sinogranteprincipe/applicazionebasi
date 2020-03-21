@@ -20,6 +20,8 @@ public class ClassDiagramDAO  {
     private static final String GET_LAST_INSERTED_ID="SELECT \"ID_CLASS_DIAGRAM\" FROM \"CLASS_DIAGRAM\" WHERE \"ID_CLASS_DIAGRAM\" = (SELECT MAX(\"ID_CLASS_DIAGRAM\") FROM \"CLASS_DIAGRAM\")";
     private static final String READ_ALL_BY_NAME = "SELECT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM \"CLASS_DIAGRAM\" WHERE \"CLASS_DIAGRAM\".\"NOME\" = ?";
     private static final String READ_ALL_NOT_IN_PACKAGE = "SELECT DISTINCT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM (\"CLASS_DIAGRAM\" INNER JOIN \"CD_DI_RIFERIMENTO\" ON  \"CD_DI_RIFERIMENTO\".\"ID_PACKAGE\" <> ?)";
+    private static final String READ_BY_ID = "SELECT \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\", \"CLASS_DIAGRAM\".\"NOME\", \"CLASS_DIAGRAM\".\"COMMENTO\" FROM \"CLASS_DIAGRAM\" WHERE \"CLASS_DIAGRAM\".\"ID_CLASS_DIAGRAM\" = ?";
+
 
     public ClassDiagramDAO() throws SQLException {
         sharedDatabase = MyOracleConnection.getInstance().getConnection();
@@ -125,5 +127,25 @@ public class ClassDiagramDAO  {
         }
 
         return i;
+    }
+
+    public ClassDiagram readById(int idClassDiagram) throws SQLException {
+        ClassDiagram c;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+
+        preparedStatement = sharedDatabase.prepareStatement(READ_BY_ID);
+        preparedStatement.setInt(1,idClassDiagram);
+        preparedStatement.execute();
+        result = preparedStatement.getResultSet();
+        result.next();
+            c = new ClassDiagram(result.getInt(1), result.getString(2), result.getString(3));
+        if(result != null){
+            result.close();
+        }
+        if(preparedStatement != null){
+            preparedStatement.close();
+        }
+        return c;
     }
 }

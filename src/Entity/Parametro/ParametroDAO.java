@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 public class ParametroDAO {
     Connection sharedDatabase;
@@ -44,6 +45,19 @@ public class ParametroDAO {
         if(preparedStatement != null){
             preparedStatement.close();
         }
+
+        parameters.sort(new Comparator<Parametro>() {
+            @Override
+            public int compare(Parametro parametro, Parametro t1) {
+                if(parametro.getPosizione()>t1.getPosizione()){
+                    return 1;
+                }else if(parametro.getPosizione()<t1.getPosizione()){
+                    return -1;
+                }
+                return 0;
+            }
+        });
+
         return parameters;
     }
 

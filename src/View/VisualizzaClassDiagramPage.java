@@ -31,7 +31,7 @@ public class VisualizzaClassDiagramPage {
     JLabel prompt;
     DefaultTableModel tableModel;
 
-
+    //This contains the methods
     private class VisualizzaClassDiagramPageController{
 
         private boolean areTherePackages;
@@ -352,4 +352,190 @@ public class VisualizzaClassDiagramPage {
 
     }
 
+
+    public  VisualizzaClassDiagramPage(String aPackageName){
+
+        VisualizzaClassDiagramPageController controller = new VisualizzaClassDiagramPageController();
+
+        tableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("Commento");
+        tableModel.addColumn("In Package");
+
+        view = new JPanel();
+        currentPackages = new JComboBox<>();
+        searchBar = new JTextField("Inserisci il nome del Class Diagram", 30);
+        searchButton = new JButton(IconMaker.getSearchIcon());
+        tablePane = new JScrollPane();
+        errMessage = new JLabel();
+        errMessageWrapper = new JPanel();
+        prompt = new JLabel("in");
+        errMessageWrapper.setVisible(false);
+        errMessage.setVisible(false);
+
+        tablePane.setVisible(true);
+
+        errMessageWrapper.add(errMessage);
+        errMessageWrapper.setBackground(ColorPicker.getColor("red"));
+
+        currentPackages.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        currentPackages.addItem("");
+
+        classDiagramTable = new JTable(tableModel);
+
+        tablePane.setViewportView(classDiagramTable);
+
+        controller.populatePackageList(currentPackages);
+
+
+        SpringLayout layout = new SpringLayout();
+
+        layout.putConstraint(SpringLayout.WEST, searchBar, FrameSetter.getjFrame().getWidth()/5, SpringLayout.WEST, view);
+        layout.putConstraint(SpringLayout.NORTH, searchBar, 10, SpringLayout.NORTH,view);
+
+        layout.putConstraint(SpringLayout.WEST, prompt, 10, SpringLayout.EAST, searchBar);
+        layout.putConstraint(SpringLayout.WEST, currentPackages, 25 , SpringLayout.EAST, searchBar );
+        layout.putConstraint(SpringLayout.WEST, searchButton, 10, SpringLayout.EAST, currentPackages);
+
+        layout.putConstraint(SpringLayout.NORTH, prompt, 4, SpringLayout.NORTH, searchBar );
+        layout.putConstraint(SpringLayout.NORTH, currentPackages, 0, SpringLayout.NORTH, searchBar );
+        layout.putConstraint(SpringLayout.NORTH, searchButton, -3, SpringLayout.NORTH, searchBar );
+
+
+        layout.putConstraint(SpringLayout.NORTH, errMessageWrapper, 5, SpringLayout.SOUTH, searchBar);
+        layout.putConstraint(SpringLayout.WEST, errMessageWrapper, 0, SpringLayout.WEST, searchBar);
+
+        layout.putConstraint(SpringLayout.NORTH, tablePane, 10, SpringLayout.SOUTH, errMessageWrapper);
+        layout.putConstraint(SpringLayout.WEST, tablePane, FrameSetter.getjFrame().getWidth()/5, SpringLayout.WEST, view);
+
+
+
+        tablePane.setViewportView(classDiagramTable);
+
+        view.add(currentPackages);
+        view.add(searchBar);
+        view.add(searchButton);
+        view.add(tablePane);
+        view.add(errMessageWrapper);
+        view.add(prompt);
+
+        view.setLayout(layout);
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                searchButton.setEnabled(false);
+                searchBar.setEnabled(false);
+                tableModel =  controller.populateTable();
+                classDiagramTable = new JTable(tableModel){
+                    @Override
+                    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                        Component c = super.prepareRenderer(renderer, row, column);
+                        if (c instanceof JComponent) {
+                            JComponent jc = (JComponent) c;
+                            jc.setToolTipText("<html><p width=\"500\">" +getValueAt(row, column).toString()+"</p></html>");
+                        }
+                        return c;
+                    }
+                };
+
+                classDiagramTable.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent mouseEvent) {
+                        JTable table =(JTable) mouseEvent.getSource();
+                        Point point = mouseEvent.getPoint();
+                        int row = table.rowAtPoint(point);
+                        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                            String classDiagramName = (String) table.getValueAt(row, 0);
+                            String packageName = (String) table.getValueAt(row, 2);
+                            controller.goToSearchedDiagramPage(classDiagramName,packageName);
+                        }
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent mouseEvent) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent mouseEvent) {
+
+                    }
+                });
+
+                controller.modifyTableLook();
+                tablePane.setViewportView(classDiagramTable);
+                searchButton.setEnabled(true);
+                searchBar.setEnabled(true);
+                FrameSetter.getjFrame().validate();
+            }
+        });
+
+        searchBar.addFocusListener(new FocusListener(){
+
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                controller.cleanSearchBarOnFocus();
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+
+            }
+        });
+        searchBar.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if(keyEvent.getKeyCode()==KeyEvent.VK_ENTER){
+                    searchButton.setEnabled(false);
+                    searchBar.setEnabled(false);
+                    tableModel =  controller.populateTable();
+                    classDiagramTable = new JTable(tableModel){
+                        @Override
+                        public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                            Component c = super.prepareRenderer(renderer, row, column);
+                            if (c instanceof JComponent) {
+                                JComponent jc = (JComponent) c;
+                                jc.setToolTipText("<html><p width=\"500\">" +getValueAt(row, column).toString()+"</p></html>");
+                            }
+                            return c;
+                        }
+                    };
+                    controller.modifyTableLook();
+
+                    tablePane.setViewportView(classDiagramTable);
+                    searchButton.setEnabled(true);
+                    searchBar.setEnabled(true);
+                    FrameSetter.getjFrame().validate();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+
+            }
+        });
+        currentPackages.setSelectedItem(aPackageName);
+        searchButton.doClick();
+    }
 }
