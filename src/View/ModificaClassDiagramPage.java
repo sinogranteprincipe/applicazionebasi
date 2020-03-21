@@ -105,7 +105,9 @@ public class ModificaClassDiagramPage {
                     ClassViewPanel classViewPanel = new ClassViewPanel(c);
                     ClassViewPanel.ClassViewPanelController classViewPanelController = classViewPanel.getController();
                     JButton addAttributo = classViewPanel.getAggiungiAttributo();
+                    JButton addMetodo = classViewPanel.getAggiungiMetodo();
                     addAttributo.addActionListener(actionEvent -> classViewPanelController.addAttributoPressed(c));
+                    addMetodo.addActionListener(actionEvent -> classViewPanelController.addMetodoPressed(c));
                     if(currentPageView != null){
                         currentPageView.removeAll();
                     }
@@ -305,6 +307,7 @@ public class ModificaClassDiagramPage {
         scrollPaneForTree.setViewportView(t);
 
         JButton addClasseButton = sideMenu.getAddClasse();
+        JButton addAssociazioneButton = sideMenu.getAddAssociation();
         addClasseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -339,7 +342,6 @@ public class ModificaClassDiagramPage {
                             FrameSetter.getjFrame().revalidate();
                         }
                     });
-
                     view.add(currentPageView);
                     view.setLayout(layout);
                     view.revalidate();

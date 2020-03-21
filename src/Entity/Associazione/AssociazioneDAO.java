@@ -82,6 +82,7 @@ public class AssociazioneDAO {
             preparedStatement.setInt(6, a.getIdClasseDiAssociazione());
         }
         preparedStatement.setInt(7, a.getIdClassDiagram());
-        return preparedStatement.execute();
+        preparedStatement.execute();
+        return true;
     }
 }

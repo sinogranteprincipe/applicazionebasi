@@ -92,6 +92,7 @@ public class ParametroDAO {
         preparedStatement.setInt(2,p.getIdTipo());
         preparedStatement.setInt(3,p.getPosizione());
         preparedStatement.setInt(4,p.getIdMetodo());
-        return preparedStatement.execute();
+        preparedStatement.execute();
+        return true;
     }
 }

@@ -72,7 +72,9 @@ public class ClasseDAO {
         }
         preparedStatement.setInt(6, c.getIdClassDiagram());
         preparedStatement.setString(7,c.getTipoClasse().name());
-        return preparedStatement.execute();
+        preparedStatement.execute();
+        return true;
+
     }
 
 }

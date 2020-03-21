@@ -70,7 +70,8 @@ public class AttributoDAO {
         preparedStatement.setString(6,a.getStereotipo());
         preparedStatement.setInt(7,a.getIdClasse());
         preparedStatement.setInt(8,a.getPosizione());
-        return preparedStatement.execute();
+        preparedStatement.execute();
+        return true;
     }
 
     public List<Attributo> readAllInClasse(Classe c) throws SQLException{

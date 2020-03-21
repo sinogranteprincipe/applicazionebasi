@@ -77,16 +77,17 @@ public class NuovoAttributoPanel {
             }
             return res;
         }
+
         public void createAttribute(Classe c, Tipo t){
             try {
                 AttributoDAO attributoDAO = new AttributoDAO();
                 List<Attributo> present = attributoDAO.readAllInClasse(c);
-                int pos = 1;
+                int pos = 0;
                 for(Attributo a: present){
                     pos++;
                 }
 
-                Attributo toAdd = new Attributo(-1, nameField.getText(), t.getId(), Entity.TipoDiVisibilita.getTipoDiVisibilitaByName((String) visibilita.getSelectedItem()), minValue.getText(), maxValue.getText(), defaultValue.getText(), c.getId(),pos);
+                Attributo toAdd = new Attributo(-1, nameField.getText(), t.getId(), Entity.TipoDiVisibilita.getTipoDiVisibilitaByName((String) visibilita.getSelectedItem()), minValue.getText(), maxValue.getText(), defaultValue.getText(), c.getId(),pos+1);
                 if(attributoDAO.createAttribute(toAdd)){
                     JDialog parent = (JDialog) SwingUtilities.getWindowAncestor(view);
                     parent.dispose();
@@ -115,7 +116,9 @@ public class NuovoAttributoPanel {
                 Package p;
                 primitiviList = tipoDAO.readAllPrimitives();
                 for(Tipo k: primitiviList){
-                    tipiPrimitivi.addItem(k.getNome());
+                    if(k.getId()!=0){
+                        tipiPrimitivi.addItem(k.getNome());
+                    }
                 }
                 for(ClassDiagramRiferimento cdrif: packagesrif){
                     p = packageDAO.readPackageById(cdrif.getIdPackage());

@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="applicazionebasi:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="98cded5a-1587-4702-9504-bbab1e1be3f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/applicazionebasi_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Components/NewParametroPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Components/NuovoMetodoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/applicazionebasi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/applicazionebasi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Associazione/AssociazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associazione/AssociazioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Attributo/AttributoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Attributo/AttributoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Classe/ClasseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Classe/ClasseDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Metodo/MetodoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Metodo/MetodoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Parametro/ParametroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Parametro/ParametroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/ClassViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/ClassViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Components/SideMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/SideMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +55,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/View/Resources" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -50,7 +69,7 @@
       <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src\View\Resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JAR Application.applicazionebasi.jar">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -66,6 +85,17 @@
       <module name="applicazionebasi" />
       <method v="2" />
     </configuration>
+    <configuration name="applicazionebasi.jar" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/applicazionebasi_jar/applicazionebasi.jar" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <module name="applicazionebasi" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JAR Application.applicazionebasi.jar" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -127,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584810623613</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="j">
+      <created>1584810673466</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1584810673466</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,22 +181,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1584030299043" />
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584356886467">
+    <state x="275" y="22" key="#Project_Structure" timestamp="1584822485546">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584356886467" />
-    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584008021362">
+    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1584822485546" />
+    <state x="402" y="60" key="#applicazionebasi.jar" timestamp="1584824691838">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.728@0.0.1366.728" timestamp="1584008021362" />
-    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser" timestamp="1584801909723">
+    <state x="402" y="60" key="#applicazionebasi.jar/0.0.1366.728@0.0.1366.728" timestamp="1584824691838" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584824079864">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584801909723" />
-    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584008312118">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584824079864" />
+    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584823322972">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1584008312118" />
+    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.728@0.0.1366.728" timestamp="1584823322972" />
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser" timestamp="1584813006766">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584813006766" />
+    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584823312575">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1584823312575" />
     <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1584461140783">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -176,38 +221,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="451" y="188" key="#com.intellij.tools.ToolEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584294277100" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1584810622487">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1584810672623">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584810622487" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584810672623" />
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1584607799155">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1584607799155" />
-    <state x="899" y="147" key="FileChooserDialogImpl" timestamp="1584356930349">
+    <state x="899" y="147" key="FileChooserDialogImpl" timestamp="1584823351821">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="899" y="147" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584356930349" />
+    <state x="899" y="147" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584823351821" />
     <state x="544" y="257" key="Github.ShareDialog" timestamp="1584027650327">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="544" y="257" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1584027650327" />
-    <state width="1323" height="176" key="GridCell.Tab.0.bottom" timestamp="1584810635095">
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584810635095" />
-    <state width="1323" height="176" key="GridCell.Tab.0.center" timestamp="1584810635095">
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.center" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584810635095" />
-    <state width="1323" height="176" key="GridCell.Tab.0.left" timestamp="1584810635095">
+    <state width="1323" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.left" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584810635095" />
-    <state width="1323" height="176" key="GridCell.Tab.0.right" timestamp="1584810635095">
+    <state width="1323" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.right" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584810635095" />
+    <state width="1323" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
     <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1584646795043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -232,18 +277,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="439" y="75" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1584525060500" />
-    <state x="184" y="198" width="1040" height="530" key="SettingsEditor" timestamp="1584461145224">
+    <state x="184" y="20" width="1040" height="708" key="SettingsEditor" timestamp="1584823581989">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="198" width="1040" height="530" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584461145224" />
+    <state x="184" y="20" width="1040" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584823581989" />
     <state x="444" y="197" key="SimpleOpenTaskDialog" timestamp="1584181909387">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="444" y="197" key="SimpleOpenTaskDialog/0.0.1366.728@0.0.1366.728" timestamp="1584181909387" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584810625106">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584810678151">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584810625106" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584810678151" />
     <state x="92" y="92" width="1182" height="533" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584783630329">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -260,10 +305,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1584294394338" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1584717219316">
+    <state x="425" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1584814223719">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1584717219316" />
+    <state x="425" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1584814223719" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1584815117021">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1584815117021" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1584799916582">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -281,9 +330,24 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java</url>
-          <line>122</line>
-          <option name="timeStamp" value="33" />
+          <url>file://$PROJECT_DIR$/src/View/Components/NuovoMetodoPanel.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Entity/ClassDiagram/ClassDiagramDAO.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/Components/NewParametroPanel.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
