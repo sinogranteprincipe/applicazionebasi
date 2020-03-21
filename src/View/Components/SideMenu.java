@@ -77,11 +77,9 @@ public class SideMenu {
         buttonContainerAssociazione.setVisible(true);
         buttonContainerClasse.setVisible(true);
         addAssociation.setVisible(true);
-        modifyAssociazione.setVisible(true);
         associationLabel.setVisible(true);
         classLabel.setVisible(true);
         addClasse.setVisible(true);
-        modifyClasse.setVisible(true);
         classDiagramContainer.setVisible(true);
 
         buttonContainerAssociazione.add(associationLabel);
