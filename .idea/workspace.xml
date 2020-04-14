@@ -1,232 +1,355 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="applicazionebasi:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269f0b8-f437-44cc-85b4-c4facd3d7053" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/applicazionebasi_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/MigLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    <list default="true" id="98cded5a-1587-4702-9504-bbab1e1be3f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/applicazionebasi_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Components/NewParametroPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Components/NuovoMetodoPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/applicazionebasi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/applicazionebasi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Associazione/Associazione.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Associazione/AssociazioneDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Attributo/Attributo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Attributo/AttributoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ClassDiagram/ClassDiagram.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ClassDiagram/ClassDiagramDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ClassDiagramRiferimento/ClassDiagramRiferimento.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ClassDiagramRiferimento/ClassDiagramRiferimentoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Classe/Classe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Classe/ClasseDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/GerarchiaClassi/GerarchiaClassi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/GerarchiaClassi/GerarchiaClassiDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Metodo/Metodo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Metodo/MetodoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/MyOracleConnection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Package/Package.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Package/PackageDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Parametro/Parametro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Parametro/ParametroDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Partecipa/Partecipa.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Partecipa/PartecipaDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/RuoloAssociazione.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Tipo/Tipo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Tipo/TipoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TipoDiAssociazione.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TipoDiClasse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TipoDiVisibilita.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/ClassViewPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/ColorPicker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/FrameSetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/GerarchiaClassiOption.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/IconMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/MenuBarBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/ModifyClasseOptionPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/NewParametroPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/NuovoMetodoPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Components/SideMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/NuovoClassDiagramPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/NuovoPackagePage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Resources/add.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Resources/edit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Resources/search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/VisualizzaClassDiagramPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/VisualizzaPackagesPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Associazione/AssociazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associazione/AssociazioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Attributo/AttributoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Attributo/AttributoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Classe/ClasseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Classe/ClasseDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Metodo/MetodoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Metodo/MetodoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Parametro/ParametroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Parametro/ParametroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/ClassViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/ClassViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Components/SideMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Components/SideMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ModificaClassDiagramPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
+  <component name="FavoritesManager">
+    <favorites_list name="applicazionebasi" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="C:\Program Files\Git\bin\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
-  <component name="ProjectId" id="1a1hCx3aQgiwBYFTJjnIerhBbxu" />
+  <component name="ProjectId" id="1Z1VMz3Ba7DEsM2StQnzpkta1LQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="ToolWindowRun.ShowToolbar" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/View/Resources" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="View.Components" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src\View" />
+      <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\sinog\Desktop\applicazionebasiv2\src\View\Resources" />
+      <recent name="C:\Users\sinog\IdeaProjects\applicazionebasi\src\View\Resources" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager" selected="JAR Application.applicazionebasi.jar">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="applicazionebasi" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="StructureViewFactory">
-    <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",SHOW_NON_PUBLIC,SHOW_FIELDS,SHOW_LAMBDA" />
+    <configuration default="true" type="JarApplication">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files (x86)/Java/jre1.8.0_241" />
+      <module name="applicazionebasi" />
+      <method v="2" />
+    </configuration>
+    <configuration name="applicazionebasi.jar" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/applicazionebasi_jar/applicazionebasi.jar" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <module name="applicazionebasi" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JAR Application.applicazionebasi.jar" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b269f0b8-f437-44cc-85b4-c4facd3d7053" name="Default Changelist" comment="" />
-      <created>1585908883551</created>
+      <changelist id="98cded5a-1587-4702-9504-bbab1e1be3f4" name="Default Changelist" comment="" />
+      <created>1584006543384</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1585908883551</updated>
+      <updated>1584006543384</updated>
     </task>
+    <task id="LOCAL-00001" summary="things">
+      <created>1584121246117</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1584121246117</updated>
+    </task>
+    <task id="LOCAL-00003" summary="things">
+      <created>1584383825310</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584383825310</updated>
+    </task>
+    <task id="LOCAL-00004" summary="things">
+      <created>1584384142216</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584384142216</updated>
+    </task>
+    <task id="LOCAL-00005" summary="things">
+      <created>1584522154245</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1584522154245</updated>
+    </task>
+    <task id="LOCAL-00006" summary="things">
+      <created>1584620542429</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584620542429</updated>
+    </task>
+    <task id="LOCAL-00007" summary="things">
+      <created>1584732586362</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1584732586362</updated>
+    </task>
+    <task id="LOCAL-00008" summary="j">
+      <created>1584810623613</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1584810623613</updated>
+    </task>
+    <task id="LOCAL-00009" summary="j">
+      <created>1584810673466</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1584810673466</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="things" />
+    <MESSAGE value="j" />
+    <option name="LAST_COMMIT_MESSAGE" value="j" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="22" key="#Auto_Import" timestamp="1586683135269">
+    <state x="550" y="26" key="#Auto_Import" timestamp="1584111512437">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="22" key="#Auto_Import/0.0.1366.728@0.0.1366.728" timestamp="1586683135269" />
-    <state x="275" y="22" key="#Project_Structure" timestamp="1585909297638">
+    <state x="550" y="26" key="#Auto_Import/0.0.1366.728@0.0.1366.728" timestamp="1584111512437" />
+    <state x="275" y="22" key="#Notifications" timestamp="1584030299043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1585909297638" />
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586878061103">
+    <state x="275" y="22" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1584030299043" />
+    <state x="275" y="22" key="#Project_Structure" timestamp="1584822485546">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1586878061103" />
-    <state x="488" y="65" key="#com.intellij.ide.util.MemberChooser" timestamp="1586856702457">
+    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1584822485546" />
+    <state x="402" y="60" key="#applicazionebasi.jar" timestamp="1584824691838">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="65" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1586856702457" />
-    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1586878059099">
+    <state x="402" y="60" key="#applicazionebasi.jar/0.0.1366.728@0.0.1366.728" timestamp="1584824691838" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584824079864">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1586878059099" />
-    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586453459999">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584824079864" />
+    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584823322972">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1586453459999" />
-    <state x="168" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586624167974">
+    <state x="463" y="69" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.728@0.0.1366.728" timestamp="1584823322972" />
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser" timestamp="1584813006766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="168" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1586624167974" />
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586683793622">
+    <state x="829" y="51" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584813006766" />
+    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584823312575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1586683793622" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1586878153750">
+    <state x="412" y="148" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1584823312575" />
+    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1584461140783">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586878153750" />
-    <state x="389" y="105" key="FileChooserDialogImpl" timestamp="1586269735646">
+    <state x="534" y="75" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584461140783" />
+    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584803821003">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="389" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586269735646" />
-    <state width="1323" height="119" key="GridCell.Tab.0.bottom" timestamp="1586878153765">
+    <state x="479" y="249" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1584803821003" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584205409935">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586878153765" />
-    <state width="1323" height="119" key="GridCell.Tab.0.center" timestamp="1586878153765">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1584205409935" />
+    <state x="451" y="188" key="#com.intellij.tools.ToolEditorDialog" timestamp="1584294277100">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586878153765" />
-    <state width="1323" height="119" key="GridCell.Tab.0.left" timestamp="1586878153765">
+    <state x="451" y="188" key="#com.intellij.tools.ToolEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1584294277100" />
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1584810672623">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586878153765" />
-    <state width="1323" height="119" key="GridCell.Tab.0.right" timestamp="1586878153765">
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584810672623" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1584607799155">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="119" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586878153765" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1586877838296">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1584607799155" />
+    <state x="899" y="147" key="FileChooserDialogImpl" timestamp="1584823351821">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586877838296" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1586877838296">
+    <state x="899" y="147" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584823351821" />
+    <state x="544" y="257" key="Github.ShareDialog" timestamp="1584027650327">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586877838296" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1586877838296">
+    <state x="544" y="257" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1584027650327" />
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586877838296" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1586877838296">
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.center" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586877838296" />
-    <state x="184" y="0" key="SettingsEditor" timestamp="1586774004257">
+    <state width="1323" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.left" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586774004257" />
-    <state x="408" y="257" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585909198265">
+    <state width="1323" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="176" key="GridCell.Tab.0.right" timestamp="1584824694865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="408" y="257" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1366.728@0.0.1366.728" timestamp="1585909198265" />
-    <state x="65" y="0" key="new project wizard" timestamp="1586269738375">
+    <state width="1323" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584824694865" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1584646795043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1586269738375" />
-    <state x="425" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1586681790596">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584646795043" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1584646795043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="425" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1586681790596" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1586874413385">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1584646795043" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1584646795043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586874413385" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1586791838062">
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1584646795043" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1584646795043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1586791838062" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1584646795043" />
+    <state x="395" y="80" key="MultipleFileMergeDialog" timestamp="1584090607526">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="395" y="80" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1584090607526" />
+    <state x="439" y="75" key="RollbackChangesDialog" timestamp="1584525060500">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="439" y="75" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1584525060500" />
+    <state x="184" y="20" width="1040" height="708" key="SettingsEditor" timestamp="1584823581989">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="20" width="1040" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584823581989" />
+    <state x="444" y="197" key="SimpleOpenTaskDialog" timestamp="1584181909387">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="444" y="197" key="SimpleOpenTaskDialog/0.0.1366.728@0.0.1366.728" timestamp="1584181909387" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584810678151">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584810678151" />
+    <state x="92" y="92" width="1182" height="533" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584783630329">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="533" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1584783630329" />
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1584181408706">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584181408706" />
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584779168986">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1584779168986" />
+    <state x="65" y="0" key="new project wizard" timestamp="1584294394338">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1584294394338" />
+    <state x="425" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1584814223719">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="425" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1584814223719" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1584815117021">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1584815117021" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1584799916582">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584799916582" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/View/Components/IconMaker.java</url>
+          <line>19</line>
+          <properties class="View.Components.IconMaker" method="getEditIcon">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/Components/NuovoMetodoPanel.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/Components/NuovoAttributoPanel.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Entity/ClassDiagram/ClassDiagramDAO.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/Components/NewParametroPanel.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
